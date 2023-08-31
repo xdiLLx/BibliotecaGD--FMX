@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2023/08/31 12:19:48.737,=rtl.dcp</Transaction>
+    <Transaction>2023/08/31 12:20:22.422,C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\GD_FMX_11.dproj=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\Package1.dproj</Transaction>
+    <Transaction>2023/08/31 12:20:39.753,=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/08/31 12:39:08.868,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDCornerButton.pas=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/08/31 12:40:22.863,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\GD_FMX_11.dproj=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\GD_FMX_11.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
