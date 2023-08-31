@@ -28,8 +28,7 @@ package GD_FMX_11;
 {$IMPLICITBUILD ON}
 
 requires
-  rtl,
-  fmx;
+  rtl;
 
 contains
   GDCornerButton in 'Source\GDCornerButton.pas';

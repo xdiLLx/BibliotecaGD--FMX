@@ -35,10 +35,7 @@ begin
   inherited;
   Background := FindStyleResource('background');
   if Assigned(Background) and (Background is TShape) then
-  begin
     TShape(Background).Fill.Color := FColor;
-    TShape(Background).Fill.Kind := TBrushKind.Solid;
-  end;
 end;
 
 procedure TGDCornerButton.SetColor(const Value: TAlphaColor);
