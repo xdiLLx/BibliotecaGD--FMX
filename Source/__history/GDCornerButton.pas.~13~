@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
-  FMX.Graphics, System.UITypes, FMX.Objects,System.Math,System.Math.Vectors;
+  FMX.Graphics, System.UITypes, FMX.Objects;
 
 type
   TGDCornerButton = class(TCornerButton)

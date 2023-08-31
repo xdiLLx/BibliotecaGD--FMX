@@ -4,28 +4,40 @@ interface
 
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
-  FMX.Graphics, System.UITypes, FMX.Objects,System.Math,System.Math.Vectors;
+  FMX.Graphics, System.UITypes, FMX.Objects;
 
 type
+  TButtonStroke = class(TPersistent)
+  private
+    FOwner: TGDCornerButton;
+    FColor: TAlphaColor;
+    FThickness: Single;
+    procedure SetColor(const Value: TAlphaColor);
+    procedure SetThickness(const Value: Single);
+  public
+    constructor Create(AOwner: TGDCornerButton);
+  published
+    property Color: TAlphaColor read FColor write SetColor;
+    property Thickness: Single read FThickness write SetThickness;
+  end;
+
   TGDCornerButton = class(TCornerButton)
   private
     FColor: TAlphaColor;
     FFillKind: TBrushKind;
-    FStrokeColor: TAlphaColor;
-    FStrokeThickness: Single;
+    FStroke: TButtonStroke;
     procedure SetColor(const Value: TAlphaColor);
     procedure SetFillKind(const Value: TBrushKind);
-    procedure SetStrokeColor(const Value: TAlphaColor);
-    procedure SetStrokeThickness(const Value: Single);
+    procedure SetStroke(const Value: TButtonStroke);
   protected
     procedure ApplyStyle; override;
   public
     constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
   published
     property Color: TAlphaColor read FColor write SetColor;
     property FillKind: TBrushKind read FFillKind write SetFillKind default TBrushKind.Solid;
-    property StrokeColor: TAlphaColor read FStrokeColor write SetStrokeColor;
-    property StrokeThickness: Single read FStrokeThickness write SetStrokeThickness;
+    property Stroke: TButtonStroke read FStroke write SetStroke;
   end;
 
 procedure Register;
@@ -37,12 +49,45 @@ begin
   RegisterComponents('Delphi | Biblioteca GD', [TGDCornerButton]);
 end;
 
+{ TButtonStroke }
+
+constructor TButtonStroke.Create(AOwner: TGDCornerButton);
+begin
+  inherited Create;
+  FOwner := AOwner;
+end;
+
+procedure TButtonStroke.SetColor(const Value: TAlphaColor);
+begin
+  if FColor <> Value then
+  begin
+    FColor := Value;
+    FOwner.Repaint;
+  end;
+end;
+
+procedure TButtonStroke.SetThickness(const Value: Single);
+begin
+  if FThickness <> Value then
+  begin
+    FThickness := Value;
+    FOwner.Repaint;
+  end;
+end;
+
 { TGDCornerButton }
 
 constructor TGDCornerButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  FStroke := TButtonStroke.Create(Self);
   FFillKind := TBrushKind.Solid;
+end;
+
+destructor TGDCornerButton.Destroy;
+begin
+  FStroke.Free;
+  inherited;
 end;
 
 procedure TGDCornerButton.ApplyStyle;
@@ -57,8 +102,8 @@ begin
     begin
       Fill.Color := FColor;
       Fill.Kind := FFillKind;
-      Stroke.Color := FStrokeColor;
-      Stroke.Thickness := FStrokeThickness;
+      Stroke.Color := FStroke.Color;
+      Stroke.Thickness := FStroke.Thickness;
     end;
   end;
 end;
@@ -81,22 +126,9 @@ begin
   end;
 end;
 
-procedure TGDCornerButton.SetStrokeColor(const Value: TAlphaColor);
+procedure TGDCornerButton.SetStroke(const Value: TButtonStroke);
 begin
-  if FStrokeColor <> Value then
-  begin
-    FStrokeColor := Value;
-    if Assigned(Scene) then ApplyStyle;
-  end;
-end;
-
-procedure TGDCornerButton.SetStrokeThickness(const Value: Single);
-begin
-  if not SameValue(FStrokeThickness, Value, TEpsilon.Position) then
-  begin
-    FStrokeThickness := Value;
-    if Assigned(Scene) then ApplyStyle;
-  end;
+  FStroke.Assign(Value);
 end;
 
 end.
