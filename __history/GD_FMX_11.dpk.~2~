@@ -32,7 +32,6 @@ requires
   fmx;
 
 contains
-  GDCornerButton in 'Source\GDCornerButton.pas',
-  GDRectangle in 'Source\GDRectangle.pas';
+  GDCornerButton in 'Source\GDCornerButton.pas';
 
 end.

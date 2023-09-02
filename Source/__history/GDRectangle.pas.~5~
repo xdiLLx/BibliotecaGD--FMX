@@ -1,0 +1,166 @@
+unit GDRectangle;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
+  FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors;
+
+type
+  TGDRectangle = class(TRectangle)
+  private
+    FSelected: Boolean;
+    FCounterCircle: TCircle;
+    FCounterLabel: TLabel;
+    FCounter: Integer;
+    FCounterVisible: Boolean;
+    FCounterDiameter: Single;
+    FCounterColor: TAlphaColor;
+    FLabelFont: TFont;
+    FLabelColor: TAlphaColor;
+
+    procedure SetSelected(const Value: Boolean);
+    procedure SetCounter(const Value: Integer);
+    procedure SetCounterVisible(const Value: Boolean);
+    procedure SetCounterDiameter(const Value: Single);
+    procedure SetCounterColor(const Value: TAlphaColor);
+    procedure SetLabelFont(const Value: TFont);
+    procedure SetLabelColor(const Value: TAlphaColor);
+    procedure UpdateCounterPosition;
+
+  protected
+    procedure ApplyStyle; override;
+
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
+  published
+    property Selected: Boolean read FSelected write SetSelected;
+    property Counter: Integer read FCounter write SetCounter default 0;
+    property CounterVisible: Boolean read FCounterVisible write SetCounterVisible default True;
+    property CounterDiameter: Single read FCounterDiameter write SetCounterDiameter;
+    property CounterColor: TAlphaColor read FCounterColor write SetCounterColor;
+    property LabelFont: TFont read FLabelFont write SetLabelFont;
+    property LabelColor: TAlphaColor read FLabelColor write SetLabelColor;
+
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Delphi | Biblioteca GD', [TGDRectangle]);
+end;
+
+constructor TGDRectangle.Create(AOwner: TComponent);
+begin
+  inherited;
+  FCounter := 0;
+  FCounterVisible := True;
+
+  FCounterCircle := TCircle.Create(Self);
+  FCounterCircle.Parent := Self;
+  FCounterCircle.Align := TAlignLayout.MostTop;
+  FCounterCircle.Align := TAlignLayout.MostRight;
+  FCounterCircle.HitTest := False;
+
+  FCounterLabel := TLabel.Create(FCounterCircle);
+  FCounterLabel.Parent := FCounterCircle;
+  FCounterLabel.Align := TAlignLayout.Center;
+  FCounterLabel.HitTest := False;
+  FCounterLabel.StyledSettings := [];  // To manually adjust Font/Color
+
+  FLabelFont := TFont.Create;
+
+  UpdateCounterPosition;
+end;
+
+destructor TGDRectangle.Destroy;
+begin
+  FLabelFont.Free;
+  inherited;
+end;
+
+procedure TGDRectangle.ApplyStyle;
+begin
+  inherited;
+  if FSelected then
+    Stroke.Thickness := 3
+  else
+    Stroke.Thickness := 1;
+
+  UpdateCounterPosition;
+end;
+
+procedure TGDRectangle.SetSelected(const Value: Boolean);
+begin
+  if FSelected <> Value then
+  begin
+    FSelected := Value;
+    ApplyStyle;
+  end;
+end;
+
+procedure TGDRectangle.SetCounter(const Value: Integer);
+begin
+  if FCounter <> Value then
+  begin
+    FCounter := Value;
+    FCounterLabel.Text := Value.ToString;
+  end;
+end;
+
+procedure TGDRectangle.SetCounterVisible(const Value: Boolean);
+begin
+  if FCounterVisible <> Value then
+  begin
+    FCounterVisible := Value;
+    FCounterCircle.Visible := Value;
+  end;
+end;
+
+procedure TGDRectangle.SetCounterDiameter(const Value: Single);
+begin
+  if not SameValue(FCounterDiameter, Value) then
+  begin
+    FCounterDiameter := Value;
+    UpdateCounterPosition;
+  end;
+end;
+
+procedure TGDRectangle.SetCounterColor(const Value: TAlphaColor);
+begin
+  if FCounterColor <> Value then
+  begin
+    FCounterColor := Value;
+    FCounterCircle.Fill.Color := Value;
+  end;
+end;
+
+procedure TGDRectangle.SetLabelFont(const Value: TFont);
+begin
+  FLabelFont.Assign(Value);
+end;
+
+procedure TGDRectangle.SetLabelColor(const Value: TAlphaColor);
+begin
+  if FLabelColor <> Value then
+  begin
+    FLabelColor := Value;
+    FCounterLabel.FontColor := Value;
+  end;
+end;
+
+procedure TGDRectangle.UpdateCounterPosition;
+begin
+  FCounterCircle.Width := FCounterDiameter;
+  FCounterCircle.Height := FCounterDiameter;
+  FCounterCircle.Margins.Top := -FCounterDiameter / 2;
+  FCounterCircle.Margins.Right := -FCounterDiameter / 2;
+end;
+
+end.
+
