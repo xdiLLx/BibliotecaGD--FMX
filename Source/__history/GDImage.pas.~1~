@@ -1,0 +1,59 @@
+unit GDImage;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FMX.Controls, FMX.Objects;
+
+type
+  TGDImage = class(TImage)
+  private
+    FXRadius: Single;
+    FYRadius: Single;
+    procedure SetXRadius(const Value: Single);
+    procedure SetYRadius(const Value: Single);
+  protected
+    procedure Paint; override;
+  published
+    property XRadius: Single read FXRadius write SetXRadius;
+    property YRadius: Single read FYRadius write SetYRadius;
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Delphi | Biblioteca GD', [TGDImage]);
+end;
+
+{ TGDImage }
+
+procedure TGDImage.Paint;
+begin
+  inherited;
+  if (FXRadius > 0) or (FYRadius > 0) then
+    Self.Bitmap.Canvas.FillEllipse(Self.BoundsRect, FXRadius, FYRadius, Self.Bitmap.Canvas.Fill);
+end;
+
+procedure TGDImage.SetXRadius(const Value: Single);
+begin
+  if FXRadius <> Value then
+  begin
+    FXRadius := Value;
+    Repaint;
+  end;
+end;
+
+procedure TGDImage.SetYRadius(const Value: Single);
+begin
+  if FYRadius <> Value then
+  begin
+    FYRadius := Value;
+    Repaint;
+  end;
+end;
+
+end.
+

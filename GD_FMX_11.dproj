@@ -91,6 +91,7 @@
         <DCCReference Include="fmx.dcp"/>
         <DCCReference Include="Source\GDCornerButton.pas"/>
         <DCCReference Include="Source\GDRectangle.pas"/>
+        <DCCReference Include="Source\GDImage.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

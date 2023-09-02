@@ -33,7 +33,6 @@ requires
 
 contains
   GDCornerButton in 'Source\GDCornerButton.pas',
-  GDRectangle in 'Source\GDRectangle.pas',
-  GDImage in 'Source\GDImage.pas';
+  GDRectangle in 'Source\GDRectangle.pas';
 
 end.
