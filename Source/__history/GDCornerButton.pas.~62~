@@ -48,8 +48,7 @@ type
     property StrokeThickness: Single read FStrokeThickness
       write SetStrokeThickness;
     property ActiveColor: TAlphaColor read FActiveColor write SetActiveColor;
-    property UseActiveColor: Boolean read FUseActiveColor
-      write SetUseActiveColor default False;
+    property UseActiveColor: Boolean read FUseActiveColor write SetUseActiveColor default False;
 {$ENDREGION}
   end;
 
@@ -173,13 +172,10 @@ procedure TGDCornerButton.DoMouseLeave;
 begin
   if Sender = Self then
   begin
-    if FUseActiveColor then
-    begin
-      FStrokeColor := FStrokeColorBackup;
-      FColor := FColorBackup;
-      if Assigned(Scene) then
-        ApplyStyle;
-    end;
+    FStrokeColor := FStrokeColorBackup;
+    FColor := FColorBackup;
+    if Assigned(Scene) then
+      ApplyStyle;
   end;
 end;
 

@@ -9,26 +9,12 @@ uses
 type
   TGDCornerButton = class(TCornerButton)
   private
-    FColor: TAlphaColor;
-    FFillKind: TBrushKind;
-    FStrokeColor: TAlphaColor;
-    FStrokeThickness: Single;
-    FActiveColor: TAlphaColor;
-    FColorBackup: TAlphaColor;
-    FStrokeColorBackup: TAlphaColor;
-    FUseActiveColor: Boolean;
-    procedure SetColor(const Value: TAlphaColor);
-    procedure SetFillKind(const Value: TBrushKind);
-    procedure SetStrokeColor(const Value: TAlphaColor);
-    procedure SetStrokeThickness(const Value: Single);
-    procedure SetActiveColor(const Value: TAlphaColor);
     function GetComponentVersion: String;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
-    procedure SetUseActiveColor(const Value: Boolean);
 
   const
-    COMPONENT_VERSION = '1.5.0';
+    COMPONENT_VERSION = '1.0';
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -38,19 +24,40 @@ type
 
   public
     constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
   published
     property Version: String read GetComponentVersion;
-{$REGION 'ColorSettings'}
+
+  end;
+
+type
+  TColorSettings = class(TPersistent)
+  private
+    FOwner: TGDCornerButton;
+
+    procedure SetColor(const Value: TAlphaColor);
+    procedure SetFillKind(const Value: TBrushKind);
+    procedure SetStrokeColor(const Value: TAlphaColor);
+    procedure SetStrokeThickness(const Value: Single);
+    procedure SetActiveColor(const Value: TAlphaColor);
+    procedure SetUseActiveColor(const Value: Boolean);
+  protected
+    FColor: TAlphaColor;
+    FFillKind: TBrushKind;
+    FStrokeColor: TAlphaColor;
+    FStrokeThickness: Single;
+    FActiveColor: TAlphaColor;
+    FColorBackup: TAlphaColor;
+    FStrokeColorBackup: TAlphaColor;
+    FUseActiveColor: Boolean;
+  public
+    constructor Create(AOwner: TGDCornerButton);
+  published
     property Color: TAlphaColor read FColor write SetColor;
+    property ActiveColor: TAlphaColor read FActiveColor write SetActiveColor;
+    property StrokeColor: TAlphaColor read FStrokeColor write SetStrokeColor;
     property FillKind: TBrushKind read FFillKind write SetFillKind
       default TBrushKind.Solid;
-    property StrokeColor: TAlphaColor read FStrokeColor write SetStrokeColor;
-    property StrokeThickness: Single read FStrokeThickness
-      write SetStrokeThickness;
-    property ActiveColor: TAlphaColor read FActiveColor write SetActiveColor;
-    property UseActiveColor: Boolean read FUseActiveColor
-      write SetUseActiveColor default False;
-{$ENDREGION}
   end;
 
 procedure Register;
@@ -153,6 +160,12 @@ begin
 
 end;
 
+destructor TGDCornerButton.Destroy;
+begin
+  FColorSettings.Free;
+  inherited;
+end;
+
 procedure TGDCornerButton.DoMouseEnter;
 begin
   if Sender = Self then
@@ -173,13 +186,10 @@ procedure TGDCornerButton.DoMouseLeave;
 begin
   if Sender = Self then
   begin
-    if FUseActiveColor then
-    begin
-      FStrokeColor := FStrokeColorBackup;
-      FColor := FColorBackup;
-      if Assigned(Scene) then
-        ApplyStyle;
-    end;
+    FStrokeColor := FStrokeColorBackup;
+    FColor := FColorBackup;
+    if Assigned(Scene) then
+      ApplyStyle;
   end;
 end;
 
