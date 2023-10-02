@@ -1,0 +1,92 @@
+unit GDImage;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Objects,
+  FMX.ImgList, System.Types, FMX.Graphics, FMX.MultiResBitmap;
+
+type
+  TGDImage = class(TImage)
+  private
+    FImageList: TImageList;
+    FActualImageName: string;
+    FImageName: string;
+    procedure SetImageList(const Value: TImageList);
+    procedure SetImageNameSelector(const Value: TStringList);
+    procedure SetImageFromImageList(AImageName: String; AImage: TImage; AImageList: TImageList);
+  protected
+    procedure Loaded; override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  published
+    property ImageList: TImageList read FImageList write SetImageList;
+    property ImageNameSelector: TStringList read FImageNameSelector write SetImageNameSelector stored False;
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Delphi | Biblioteca GD', [TGDImage]);
+end;
+
+constructor TGDImage.Create(AOwner: TComponent);
+begin
+  inherited;
+  FImageNameSelector := TStringList.Create;
+end;
+
+destructor TGDImage.Destroy;
+begin
+  FImageNameSelector.Free;
+  inherited;
+end;
+
+procedure TGDImage.Loaded;
+begin
+  inherited;
+  if (FImageList <> nil) and (FActualImageName <> '') then
+    SetImageFromImageList(FActualImageName, Self, FImageList);
+end;
+
+procedure TGDImage.SetImageFromImageList(AImageName: String; AImage: TImage; AImageList: TImageList);
+var
+  Bmp: TCustomBitmapItem;
+  Size: TSize;
+begin
+  AImageList.BitmapItemByName(AImageName, Bmp, Size);
+  AImage.Bitmap := Bmp.MultiResBitmap.Bitmaps[1.0];
+end;
+
+procedure TGDImage.SetImageList(const Value: TImageList);
+var
+  I: Integer;
+begin
+  if FImageList <> Value then
+  begin
+    FImageList := Value;
+    FImageNameSelector.Clear;
+    if FImageList <> nil then
+    begin
+      for I := 0 to FImageList.Source.Count - 1 do
+        FImageNameSelector.Add(FImageList.Source[I].Name);
+    end;
+  end;
+end;
+
+procedure TGDImage.SetImageNameSelector(const Value: TStringList);
+begin
+  if Value.Count > 0 then
+  begin
+    FActualImageName := Value[0];
+    if not (csLoading in ComponentState) then
+      SetImageFromImageList(FActualImageName, Self, FImageList);
+  end;
+end;
+
+end.
+

@@ -11,13 +11,17 @@ type
   TGDCornerButton = class(TCornerButton)
   private
     FColorSettings: TColorSettings;
+
+    function GetComponentVersion: String;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
     procedure SetColorSettings(Value: TColorSettings);
     procedure ColorSettingsChanged(Sender: TObject);
     procedure ChildOnMouseEnter(Sender: TObject);
     procedure ChildOnMouseLeave(Sender: TObject);
-    function GetVersion: string;
+
+  const
+    COMPONENT_VERSION = '2.0.0';
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -30,7 +34,7 @@ type
     destructor Destroy; override;
 
   published
-    property About: String read GetVersion;
+    property About: String read GetComponentVersion;
     property ColorSettings: TColorSettings read FColorSettings
       write SetColorSettings;
   end;
@@ -70,6 +74,11 @@ begin
   FColorSettings.OnChange := ColorSettingsChanged;
   OnMouseEnter := DoMouseEnter;
   OnMouseLeave := DoMouseLeave;
+end;
+
+function TGDCornerButton.GetComponentVersion: String;
+begin
+  Result := COMPONENT_VERSION;
 end;
 
 procedure TGDCornerButton.Loaded;
@@ -147,11 +156,6 @@ begin
         ApplyStyle;
     end;
   end;
-end;
-
-function TGDCornerButton.GetVersion: string;
-begin
-  result := GetComponentVersion;
 end;
 
 procedure TGDCornerButton.MouseDown(Button: TMouseButton; Shift: TShiftState;

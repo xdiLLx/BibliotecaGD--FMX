@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Objects,
-  FMX.ImgList, System.Types,FMX.MultiResBitmap, GD.Types;
+  FMX.ImgList, System.Types,FMX.MultiResBitmap;
 
 type
   TGDImage = class(TImage)
@@ -15,13 +15,11 @@ type
     procedure SetImageName(const Value: string);
     procedure SetImageFromImageList(AImageName: String; AImage: TImage;
       AImageList: TImageList);
-    function GetVersion: string;
   protected
     procedure Loaded; override;
   public
     constructor Create(AOwner: TComponent); override;
   published
-    property About: String read GetVersion;
     property ImageList: TImageList read FImageList write SetImageList;
     property ImageName: string read FImageName write SetImageName;
   end;
@@ -38,11 +36,6 @@ end;
 constructor TGDImage.Create(AOwner: TComponent);
 begin
   inherited;
-end;
-
-function TGDImage.GetVersion: string;
-begin
- Result := GetComponentVersion;
 end;
 
 procedure TGDImage.Loaded;

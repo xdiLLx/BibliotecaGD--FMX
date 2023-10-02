@@ -4,26 +4,25 @@ interface
 
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Objects,
-  FMX.ImgList, System.Types,FMX.MultiResBitmap, GD.Types;
+  FMX.ImgList, System.Types, FMX.Graphics, FMX.MultiResBitmap;
 
 type
   TGDImage = class(TImage)
   private
     FImageList: TImageList;
+    FActualImageName: string;
     FImageName: string;
     procedure SetImageList(const Value: TImageList);
     procedure SetImageName(const Value: string);
-    procedure SetImageFromImageList(AImageName: String; AImage: TImage;
-      AImageList: TImageList);
-    function GetVersion: string;
+    procedure SetImageFromImageList(AImageName: String; AImage: TImage; AImageList: TImageList);
   protected
     procedure Loaded; override;
   public
     constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
   published
-    property About: String read GetVersion;
     property ImageList: TImageList read FImageList write SetImageList;
-    property ImageName: string read FImageName write SetImageName;
+    property ImageName: string read FImageName write SetImageName stored False;
   end;
 
 procedure Register;
@@ -38,22 +37,23 @@ end;
 constructor TGDImage.Create(AOwner: TComponent);
 begin
   inherited;
+  FImageName := '';
 end;
 
-function TGDImage.GetVersion: string;
+destructor TGDImage.Destroy;
 begin
- Result := GetComponentVersion;
+  FImageNameSelector.Free;
+  inherited;
 end;
 
 procedure TGDImage.Loaded;
 begin
   inherited;
-  if (FImageList <> nil) and (FImageName <> '') then
-    SetImageFromImageList(FImageName, Self, FImageList);
+  if (FImageList <> nil) and (FActualImageName <> '') then
+    SetImageFromImageList(FActualImageName, Self, FImageList);
 end;
 
-procedure TGDImage.SetImageFromImageList(AImageName: String; AImage: TImage;
-  AImageList: TImageList);
+procedure TGDImage.SetImageFromImageList(AImageName: String; AImage: TImage; AImageList: TImageList);
 var
   Bmp: TCustomBitmapItem;
   Size: TSize;
@@ -63,21 +63,30 @@ begin
 end;
 
 procedure TGDImage.SetImageList(const Value: TImageList);
+var
+  I: Integer;
 begin
   if FImageList <> Value then
   begin
     FImageList := Value;
+    FImageNameSelector.Clear;
+    if FImageList <> nil then
+    begin
+      for I := 0 to FImageList.Source.Count - 1 do
+        FImageNameSelector.Add(FImageList.Source[I].Name);
+    end;
   end;
 end;
 
-procedure TGDImage.SetImageName(const Value: string);
+procedure TGDImage.SetImageNameSelector(const Value: TStringList);
 begin
-  if FImageName <> Value then
+  if Value.Count > 0 then
   begin
-    FImageName := Value;
-    if not(csLoading in ComponentState) then
-      SetImageFromImageList(FImageName, Self, FImageList);
+    FActualImageName := Value[0];
+    if not (csLoading in ComponentState) then
+      SetImageFromImageList(FActualImageName, Self, FImageList);
   end;
 end;
 
 end.
+
