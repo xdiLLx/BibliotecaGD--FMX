@@ -7,7 +7,7 @@ uses
   FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors;
 
 const
-    COMPONENT_VERSION = '2.0.0';
+    COMPONENT_VERSION = '1.7.0';
 function GetComponentVersion: String;
 type
   TNotifyChange = procedure(Sender: TObject) of object;

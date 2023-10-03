@@ -6,6 +6,9 @@ uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
   FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors;
 
+const
+    COMPONENT_VERSION = '2.0.0';
+function GetComponentVersion: String;
 type
   TNotifyChange = procedure(Sender: TObject) of object;
 
@@ -19,7 +22,6 @@ type
     FActiveColor: TAlphaColor;
     FUseActiveColor: Boolean;
     FOnChange: TNotifyChange;
-    FActiveFontColor: TAlphaColor;
 
     procedure SetColor(const Value: TAlphaColor);
     procedure SetFillKind(const Value: TBrushKind);
@@ -27,15 +29,12 @@ type
     procedure SetStrokeThickness(const Value: Single);
     procedure SetActiveColor(const Value: TAlphaColor);
     procedure SetUseActiveColor(const Value: Boolean);
-    procedure SetActiveFontColor(const Value: TAlphaColor);
 
   protected
     procedure DoChange; virtual;
   public
     FColorBackup: TAlphaColor;
     FStrokeColorBackup: TAlphaColor;
-    FActiveFontColorBackup: TAlphaColor;
-    FFontColorBackup: TAlphaColor;
     constructor Create;
   published
 {$REGION 'ColorSettings'}
@@ -46,8 +45,6 @@ type
     property StrokeThickness: Single read FStrokeThickness
       write SetStrokeThickness;
     property ActiveColor: TAlphaColor read FActiveColor write SetActiveColor;
-    property ActiveFontColor: TAlphaColor read FActiveFontColor
-      write SetActiveFontColor;
     property UseActiveColor: Boolean read FUseActiveColor
       write SetUseActiveColor default False;
 {$ENDREGION}
@@ -56,16 +53,20 @@ type
 
 implementation
 
+{ Get Version}
+function GetComponentVersion: String;
+begin
+  Result := COMPONENT_VERSION;
+end;
+
 { TColorSettings }
 
 constructor TColorSettings.Create;
 begin
   FColor := TAlphaColorRec.White;
-  FStrokeColor := TAlphaColorRec.BLACK;
-  FStrokeThickness := 1;
+  FStrokeThickness := 0;
   FUseActiveColor := False;
   FFillKind := TBrushKind.Solid;
-  FActiveFontColor := TAlphaColorRec.BLACK;
 end;
 
 procedure TColorSettings.DoChange;
@@ -83,14 +84,7 @@ begin
   end;
 end;
 
-procedure TColorSettings.SetActiveFontColor(const Value: TAlphaColor);
-begin
-  if FActiveFontColor <> Value then
-  begin
-    FActiveFontColor := Value;
-    DoChange;
-  end;
-end;
+
 
 procedure TColorSettings.SetColor(const Value: TAlphaColor);
 begin

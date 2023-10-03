@@ -33,6 +33,10 @@ requires
 
 contains
   GDCornerButton in 'Source\GDCornerButton.pas',
-  GDRectangle in 'Source\GDRectangle.pas';
+  GDImage in 'Source\GDImage.pas',
+  GD.Types in 'Source\GD.Types.pas',
+  GDQRCode in 'Source\GDQRCode.pas',
+  GD.DelphiZXIngQRCode in 'Source\GD.DelphiZXIngQRCode.pas',
+  GD.ComponentsCommon in 'Source\GD.ComponentsCommon.pas';
 
 end.
