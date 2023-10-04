@@ -141,6 +141,12 @@ begin
   FLastCursorPosition := -1;
   FUseEnterTab := True;
   TabStop := False;
+  FontPath := TPath.Combine(ExtractFileDir(ParamStr(0)), 'YourFontFileName.ttf');
+  if AddFontResource(PChar(FontPath)) > 0 then
+    SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+  StyledSettings := [];
+  Font.Family := 'dashicons';
+  Text := '';
 end;
 
 procedure TGDEdit.DefaultFormatChanged(Sender: TObject);
@@ -154,7 +160,7 @@ var
 begin
   SetDataSource(nil);
   DefaultFormat.Free;
-  FontPath := TPath.Combine(ExtractFileDir(ParamStr(0)), 'dashicons.ttf');
+  FontPath := TPath.Combine(ExtractFileDir(ParamStr(0)), 'YourFontFileName.ttf');
   if RemoveFontResource(PChar(FontPath)) then
     SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
   inherited Destroy;

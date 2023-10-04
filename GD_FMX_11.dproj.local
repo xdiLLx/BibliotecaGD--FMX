@@ -2,37 +2,44 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2023/08/31 12:19:48.000.737,=rtl.dcp</Transaction>
-    <Transaction>2023/08/31 12:20:22.000.422,C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\GD_FMX_11.dproj=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\Package1.dproj</Transaction>
+    <Transaction>2023/08/31 12:20:22.000.422,C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\Package1.dproj=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\GD_FMX_11.dproj</Transaction>
     <Transaction>2023/08/31 12:20:39.000.753,=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2023/08/31 12:39:08.000.868,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDCornerButton.pas=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2023/08/31 12:40:22.000.863,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\GD_FMX_11.dproj=C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\GD_FMX_11.dproj</Transaction>
+    <Transaction>2023/08/31 12:39:08.000.868,C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDCornerButton.pas</Transaction>
+    <Transaction>2023/08/31 12:40:22.000.863,C:\Users\GabrielDill\Documents\Embarcadero\Studio\Projects\GD_FMX_11.dproj=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\GD_FMX_11.dproj</Transaction>
     <Transaction>2023/08/31 12:45:28.000.968,=fmx.dcp</Transaction>
     <Transaction>2023/08/31 22:17:57.000.429,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/08/31 22:19:28.000.673,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDRectangle.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
+    <Transaction>2023/08/31 22:19:28.000.673,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDRectangle.pas</Transaction>
     <Transaction>2023/09/02 16:56:06.000.395,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/09/02 16:57:17.000.671,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDImage.pas</Transaction>
+    <Transaction>2023/09/02 16:57:17.000.671,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDImage.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/09/29 01:11:23.000.627,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDRectangle.pas=</Transaction>
     <Transaction>2023/09/29 13:35:00.000.328,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/09/29 13:35:39.000.639,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDTypes.pas</Transaction>
+    <Transaction>2023/09/29 13:35:39.000.639,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDTypes.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/09/29 13:36:08.000.239,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDTypes.pas=</Transaction>
     <Transaction>2023/09/29 13:36:26.000.253,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/09/29 13:36:36.000.060,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.Types.pas</Transaction>
+    <Transaction>2023/09/29 13:36:36.000.060,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.Types.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/09/30 14:53:35.000.556,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/09/30 14:54:05.000.678,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDQRCode.pas</Transaction>
+    <Transaction>2023/09/30 14:54:05.000.678,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDQRCode.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/09/30 14:54:40.000.465,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas</Transaction>
-    <Transaction>2023/09/30 15:05:23.000.860,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas=</Transaction>
     <Transaction>2023/09/30 15:05:23.000.905,=FMXComponents.dcp</Transaction>
+    <Transaction>2023/09/30 15:05:23.000.860,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas=</Transaction>
     <Transaction>2023/09/30 15:07:55.000.646,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas</Transaction>
     <Transaction>2023/09/30 15:12:41.000.635,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FMX.ComponentsCommon.pas</Transaction>
-    <Transaction>2023/09/30 15:14:21.000.526,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FMX.ComponentsCommon.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.ComponentsCommon.pas</Transaction>
-    <Transaction>2023/09/30 15:15:19.000.945,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.DelphiZXIngQRCode.pas</Transaction>
+    <Transaction>2023/09/30 15:14:21.000.526,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.ComponentsCommon.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FMX.ComponentsCommon.pas</Transaction>
+    <Transaction>2023/09/30 15:15:19.000.945,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.DelphiZXIngQRCode.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas</Transaction>
     <Transaction>2023/10/02 23:21:03.000.350,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDExportCSV.pas</Transaction>
     <Transaction>2023/10/02 23:21:12.000.910,=dbrtl.dcp</Transaction>
     <Transaction>2023/10/02 23:25:34.000.005,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/10/02 23:25:56.000.609,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDExportJSON.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
+    <Transaction>2023/10/02 23:25:56.000.609,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDExportJSON.pas</Transaction>
     <Transaction>2023/10/03 00:08:00.000.799,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/10/03 00:08:16.000.570,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDEdit.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
+    <Transaction>2023/10/03 00:08:16.000.570,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDEdit.pas</Transaction>
     <Transaction>2023/10/03 00:08:56.000.882,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDEdit.pas=</Transaction>
     <Transaction>2023/10/03 00:09:02.000.363,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDEdit.pas</Transaction>
+    <Transaction>2023/10/04 02:10:28.000.436,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
+    <Transaction>2023/10/04 02:10:57.000.678,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\CustomComponent.pas</Transaction>
+    <Transaction>2023/10/04 02:13:23.000.765,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\CustomComponent.pas=</Transaction>
+    <Transaction>2023/10/04 02:14:44.000.565,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
+    <Transaction>2023/10/04 02:15:17.000.503,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FrameTeste.pas</Transaction>
+    <Transaction>2023/10/04 02:15:17.000.503,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.fmx=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FrameTeste.fmx</Transaction>
+    <Transaction>2023/10/04 02:34:52.276,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FrameTeste.pas=</Transaction>
   </Transactions>
 </BorlandProject>

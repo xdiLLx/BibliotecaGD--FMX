@@ -4,12 +4,8 @@ interface
 
 uses
   System.SysUtils, System.Classes, FMX.Edit, Data.DB, GD.Types, System.Types,
-  System.Math, FMX.Types, System.UITypes, FMX.Dialogs, FMX.FontGlyphs,System.IOUtils,FMX.Text,
-  {$IFDEF MSWINDOWS}
-  Winapi.Windows
-  {$ENDIF};
-const
-  WM_FONTCHANGE = $001D;
+  System.Math, FMX.Types, System.UITypes, FMX.Dialogs, FMX.FontGlyphs,System.IOUtils,Winapi.Windows;
+
 type
   TGDEdit = class(TEdit)
   private
@@ -141,6 +137,12 @@ begin
   FLastCursorPosition := -1;
   FUseEnterTab := True;
   TabStop := False;
+  FontPath := TPath.Combine(ExtractFileDir(ParamStr(0)), 'YourFontFileName.ttf');
+  if AddFontResource(PChar(FontPath)) > 0 then
+    SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+  StyledSettings := [];
+  Font.Family := 'dashicons';
+  Text := '';
 end;
 
 procedure TGDEdit.DefaultFormatChanged(Sender: TObject);
@@ -149,14 +151,9 @@ begin
 end;
 
 destructor TGDEdit.Destroy;
-var
-  FontPath: string;
 begin
   SetDataSource(nil);
   DefaultFormat.Free;
-  FontPath := TPath.Combine(ExtractFileDir(ParamStr(0)), 'dashicons.ttf');
-  if RemoveFontResource(PChar(FontPath)) then
-    SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
   inherited Destroy;
 end;
 

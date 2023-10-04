@@ -7,10 +7,38 @@ uses
   FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors;
 
 const
-    COMPONENT_VERSION = '1.7.0';
+  COMPONENT_VERSION = '1.7.0';
 function GetComponentVersion: String;
+procedure NextControl(Sender: TObject);
+
 type
   TNotifyChange = procedure(Sender: TObject) of object;
+
+type
+  TTemplateMask = (tmNoMask, tmCPF, tmCNPJ, tmCEP, tmRG, tmPersonalizado,
+    tmDefault, tm2Decimais, tm3Decimais, tm4Decimais, tm5Decimais, tmHoraMinuto,
+    tmHoraMinutoSegundo, tmDDMMAA, tmDDMM, tmDD, tmMM, tmAA);
+
+type
+  TKeyPressEvent = procedure(Sender: TObject; var Key: Char) of object;
+
+type
+  TDefaultFormat = class(TPersistent)
+  private
+    FFloatFormat: string;
+    FDateFormat: string;
+    FOnChange: TNotifyChange;
+    procedure SetFloatFormat(const Value: string);
+    procedure SetDateFormat(const Value: string);
+  protected
+    procedure DoChange; virtual;
+  public
+    constructor Create;
+  published
+    property FloatFormat: string read FFloatFormat write SetFloatFormat;
+    property DateFormat: string read FDateFormat write SetDateFormat;
+    property OnChange: TNotifyChange read FOnChange write FOnChange;
+  end;
 
 type
   TColorSettings = class(TPersistent)
@@ -22,14 +50,12 @@ type
     FActiveColor: TAlphaColor;
     FUseActiveColor: Boolean;
     FOnChange: TNotifyChange;
-
     procedure SetColor(const Value: TAlphaColor);
     procedure SetFillKind(const Value: TBrushKind);
     procedure SetStrokeColor(const Value: TAlphaColor);
     procedure SetStrokeThickness(const Value: Single);
     procedure SetActiveColor(const Value: TAlphaColor);
     procedure SetUseActiveColor(const Value: Boolean);
-
   protected
     procedure DoChange; virtual;
   public
@@ -53,14 +79,36 @@ type
 
 implementation
 
-{ Get Version}
+{ Get Version }
 function GetComponentVersion: String;
 begin
   Result := COMPONENT_VERSION;
 end;
 
-{ TColorSettings }
+procedure NextControl(Sender: TObject);
+var
+  NextTabIndex, i: Integer;
+  NextControl, LParent,LControl: TControl;
+begin
+  LParent := TControl(TControl(Sender).Parent);
+  NextTabIndex := TControl(Sender).TabOrder + 1;
+  LControl := TControl(Sender);
+  if not LControl.TabStop then
+  begin
+    for i := 0 to LParent.ChildrenCount - 1 do
+    begin
+      if TControl(LParent.Children[i]).TabOrder = NextTabIndex then
+      begin
+        NextControl := TControl(LParent.Children[i]);
+        if NextControl.CanFocus then
+          NextControl.SetFocus;
+        break
+      end;
+    end;
+  end;
+end;
 
+{ TColorSettings }
 constructor TColorSettings.Create;
 begin
   FColor := TAlphaColorRec.White;
@@ -83,8 +131,6 @@ begin
     DoChange;
   end;
 end;
-
-
 
 procedure TColorSettings.SetColor(const Value: TAlphaColor);
 begin
@@ -127,6 +173,37 @@ begin
   if FUseActiveColor <> Value then
   begin
     FUseActiveColor := Value;
+    DoChange;
+  end;
+end;
+{ TDefaultFormat }
+
+constructor TDefaultFormat.Create;
+begin
+  FFloatFormat := '0.00';
+  FDateFormat := 'dd/mm/yyyy';
+end;
+
+procedure TDefaultFormat.DoChange;
+begin
+  if Assigned(FOnChange) then
+    FOnChange(Self);
+end;
+
+procedure TDefaultFormat.SetDateFormat(const Value: string);
+begin
+  if FDateFormat <> Value then
+  begin
+    FDateFormat := Value;
+    DoChange;
+  end;
+end;
+
+procedure TDefaultFormat.SetFloatFormat(const Value: string);
+begin
+  if FFloatFormat <> Value then
+  begin
+    FFloatFormat := Value;
     DoChange;
   end;
 end;

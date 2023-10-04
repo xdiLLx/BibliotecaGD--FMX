@@ -1,0 +1,11 @@
+object Frame1: TFrame1
+  Size.Width = 579.000000000000000000
+  Size.Height = 326.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Align = Client
+    Size.Width = 579.000000000000000000
+    Size.Height = 326.000000000000000000
+    Size.PlatformDefault = False
+  end
+end

@@ -1,0 +1,12 @@
+object Frame1: TFrame1
+  Size.Width = 475.000000000000000000
+  Size.Height = 211.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Position.X = 48.000000000000000000
+    Position.Y = 32.000000000000000000
+    Size.Width = 369.000000000000000000
+    Size.Height = 129.000000000000000000
+    Size.PlatformDefault = False
+  end
+end
