@@ -1,0 +1,54 @@
+unit GDDateFilter;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Objects,
+  GD.Types;
+
+type
+  TGDDateFilter = class(TControl)
+  private
+    FRectangleBackground: TRectangle;
+    function GetVersion: string;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  published
+    property Background: TRectangle read FRectangleBackground;
+    property About: String read GetVersion;
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Delphi | Biblioteca GD', [TGDDateFilter]);
+end;
+
+{ TGDDateFilter }
+
+constructor TGDDateFilter.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FRectangleBackground := TRectangle.Create(Self);
+  FRectangleBackground.Parent := Self;
+  FRectangleBackground.Align := TAlignLayout.Client;
+  Width := 100; // Valor padrão
+  Height := 100; // Valor padrão
+end;
+
+destructor TGDDateFilter.Destroy;
+begin
+  FRectangleBackground.Free;
+  inherited;
+end;
+
+function TGDDateFilter.GetVersion: string;
+begin
+  Result := GetComponentVersion;
+end;
+
+end.

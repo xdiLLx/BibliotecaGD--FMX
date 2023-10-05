@@ -1,0 +1,81 @@
+unit GDDateFilter;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Objects, GD.Types,
+  Data.DB, FMX.Bind.DBEngExt; // Adicionado Data.DB e FMX.Bind.DBEngExt
+
+type
+  TGDDateFilter = class(TControl)
+  private
+    FRectangleBackground: TRectangle;
+    FDataSource: TDataSource;      // Adicionado FDataSource
+    FDataField: string;            // Adicionado FDataField
+    function GetVersion: string;
+    procedure SetDataSource(const Value: TDataSource); // Setter para FDataSource
+    procedure SetDataField(const Value: string);       // Setter para FDataField
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  published
+    property Background: TRectangle read FRectangleBackground;
+    property About: String read GetVersion;
+    property DataSource: TDataSource read FDataSource write SetDataSource; // Propriedade DataSource
+    property DataField: string read FDataField write SetDataField;        // Propriedade DataField
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Delphi | Biblioteca GD', [TGDDateFilter]);
+end;
+
+{ TGDDateFilter }
+
+constructor TGDDateFilter.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FRectangleBackground := TRectangle.Create(Self);
+  FRectangleBackground.Parent := Self;
+  FRectangleBackground.Align := TAlignLayout.Client;
+  Width := 100;
+  Height := 100;
+end;
+
+destructor TGDDateFilter.Destroy;
+begin
+  FRectangleBackground.Free;
+  inherited;
+end;
+
+function TGDDateFilter.GetVersion: string;
+begin
+  Result := GetComponentVersion;
+end;
+
+// Implementação dos setters
+
+procedure TGDDateFilter.SetDataSource(const Value: TDataSource);
+begin
+  if FDataSource <> Value then
+  begin
+    FDataSource := Value;
+    // Você pode adicionar mais lógica aqui, caso queira atualizar o componente quando o DataSource for alterado.
+  end;
+end;
+
+procedure TGDDateFilter.SetDataField(const Value: string);
+begin
+  if FDataField <> Value then
+  begin
+    FDataField := Value;
+    // Você pode adicionar mais lógica aqui, caso queira atualizar o componente quando o DataField for alterado.
+  end;
+end;
+
+end.
+

@@ -1,0 +1,153 @@
+unit GDDateFilter;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Objects, GD.Types,
+  Data.DB, FMX.Bind.DBEngExt, FMX.Bind.Editors,Data.Bind.Editors;
+
+type
+  TGDDateFilter = class(TControl, TBindListLookupEditor)
+  private
+    FRectangleBackground: TRectangle;
+    FDataSource: TDataSource;
+    FDataField: string;
+    function GetVersion: string;
+    procedure SetDataSource(const Value: TDataSource);
+    procedure SetDataField(const Value: string);
+  protected
+    // Métodos de TBindListLookupEditor
+    function GetListItemIndex: Integer; override;
+    procedure SetListItemIndex(Value: Integer); override;
+    function GetListCount: Integer; override;
+    function GetListCurrent: TObject; override;
+    function GetListSource: TBaseLinkingBindSource; override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  published
+    property Background: TRectangle read FRectangleBackground;
+    property About: String read GetVersion;
+    property DataSource: TDataSource read FDataSource write SetDataSource;
+    property DataField: string read FDataField write SetDataField;
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Delphi | Biblioteca GD', [TGDDateFilter]);
+end;
+
+{ TGDDateFilter }
+
+constructor TGDDateFilter.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FRectangleBackground := TRectangle.Create(Self);
+  FRectangleBackground.Parent := Self;
+  FRectangleBackground.Align := TAlignLayout.Client;
+  Width := 100;
+  Height := 100;
+end;
+
+destructor TGDDateFilter.Destroy;
+begin
+  FRectangleBackground.Free;
+  inherited;
+end;
+
+function TGDDateFilter.GetVersion: string;
+begin
+  Result := GetComponentVersion;  // A função GetComponentVersion deverá ser definida ou removida
+end;
+
+procedure TGDDateFilter.SetDataSource(const Value: TDataSource);
+begin
+  if FDataSource <> Value then
+  begin
+    FDataSource := Value;
+    // Adicional: Atualize o componente conforme necessário aqui
+  end;
+end;
+
+procedure TGDDateFilter.SetDataField(const Value: string);
+var
+  LField: TField;
+begin
+  if Assigned(FDataSource) and Assigned(FDataSource.DataSet) and (Value <> '') then
+  begin
+    LField := FDataSource.DataSet.FindField(Value);
+    if Assigned(LField) and (LField.DataType in [ftDate, ftDateTime]) then
+    begin
+      if FDataField <> Value then
+      begin
+        FDataField := Value;
+        // Adicional: Atualize o componente conforme necessário aqui
+      end;
+    end
+    else
+      raise Exception.CreateFmt('O campo "%s" não é um campo Date ou DateTime.', [Value]);
+  end;
+end;
+
+function TGDDateFilter.GetListItemIndex: Integer;
+var
+  LDataSet: TDataSet;
+begin
+  Result := -1;
+  if Assigned(FDataSource) and Assigned(FDataSource.DataSet) then
+  begin
+    LDataSet := FDataSource.DataSet;
+    if LDataSet.Active and (FDataField <> '') then
+      Result := LDataSet.FieldDefs.IndexOf(FDataField);
+  end;
+end;
+
+procedure TGDDateFilter.SetListItemIndex(Value: Integer);
+var
+  LDataSet: TDataSet;
+begin
+  if Assigned(FDataSource) and Assigned(FDataSource.DataSet) then
+  begin
+    LDataSet := FDataSource.DataSet;
+    if (Value >= 0) and (Value < LDataSet.FieldDefs.Count) then
+      FDataField := LDataSet.FieldDefs[Value].Name;
+  end;
+end;
+
+function TGDDateFilter.GetListCount: Integer;
+var
+  LDataSet: TDataSet;
+begin
+  Result := 0;
+  if Assigned(FDataSource) and Assigned(FDataSource.DataSet) then
+  begin
+    LDataSet := FDataSource.DataSet;
+    LDataSet.FieldDefs.Update;
+    Result := LDataSet.FieldDefs.Count;
+  end;
+end;
+
+function TGDDateFilter.GetListCurrent: TObject;
+var
+  LDataSet: TDataSet;
+begin
+  Result := nil;
+  if Assigned(FDataSource) and Assigned(FDataSource.DataSet) then
+  begin
+    LDataSet := FDataSource.DataSet;
+    if LDataSet.Active and (FDataField <> '') then
+      Result := LDataSet.FieldByName(FDataField);
+  end;
+end;
+
+function TGDDateFilter.GetListSource: TBaseLinkingBindSource;
+begin
+  Result := nil;
+end;
+
+end.
+

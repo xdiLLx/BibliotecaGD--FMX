@@ -29,14 +29,19 @@ package GD_FMX_11;
 
 requires
   rtl,
-  fmx;
+  fmx,
+  dbrtl;
 
 contains
   GDCornerButton in 'Source\GDCornerButton.pas',
   GDImage in 'Source\GDImage.pas',
   GD.Types in 'Source\GD.Types.pas',
   GDQRCode in 'Source\GDQRCode.pas',
-  DelphiZXIngQRCode in 'Source\DelphiZXIngQRCode.pas',
-  FMX.ComponentsCommon in 'Source\FMX.ComponentsCommon.pas';
+  GD.DelphiZXIngQRCode in 'Source\GD.DelphiZXIngQRCode.pas',
+  GD.ComponentsCommon in 'Source\GD.ComponentsCommon.pas',
+  GDExportCSV in 'Source\GDExportCSV.pas',
+  GDExportJSON in 'Source\GDExportJSON.pas',
+  GDEdit in 'Source\GDEdit.pas',
+  GDDateFilter in 'Source\GDDateFilter.pas';
 
 end.

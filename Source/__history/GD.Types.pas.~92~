@@ -9,7 +9,7 @@ uses
 const
   COMPONENT_VERSION = '1.7.0';
 function GetComponentVersion: String;
-procedure NextControl(Sender:TObject);
+procedure NextControl(Sender: TObject);
 
 type
   TNotifyChange = procedure(Sender: TObject) of object;
@@ -85,21 +85,27 @@ begin
   Result := COMPONENT_VERSION;
 end;
 
-procedure NextControl(Sender:TObject);
+procedure NextControl(Sender: TObject);
 var
-  NextTabIndex: Integer;
-  NextControl,LParent: TControl;
+  NextTabIndex, i: Integer;
+  NextControl, LParent,LControl: TControl;
 begin
   LParent := TControl(TControl(Sender).Parent);
   NextTabIndex := TControl(Sender).TabOrder + 1;
-  repeat
-    if NextTabIndex > LParent.ChildrenCount - 1 then
-      NextTabIndex := 0;
-    NextControl := TControl(LParent.Children[NextTabIndex]);
-    Inc(NextTabIndex);
-  until (NextControl.CanFocus) or (NextTabIndex = TControl(Sender).TabOrder);
-  if NextControl.CanFocus then
-    NextControl.SetFocus;
+  LControl := TControl(Sender);
+  if not LControl.TabStop then
+  begin
+    for i := 0 to LParent.ChildrenCount - 1 do
+    begin
+      if TControl(LParent.Children[i]).TabOrder = NextTabIndex then
+      begin
+        NextControl := TControl(LParent.Children[i]);
+        if NextControl.CanFocus then
+          NextControl.SetFocus;
+        break
+      end;
+    end;
+  end;
 end;
 
 { TColorSettings }

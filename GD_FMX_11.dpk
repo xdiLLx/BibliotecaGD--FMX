@@ -30,7 +30,10 @@ package GD_FMX_11;
 requires
   rtl,
   fmx,
-  dbrtl;
+  dbrtl,
+  bindengine,
+  bindcomp,
+  bindcompfmx;
 
 contains
   GDCornerButton in 'Source\GDCornerButton.pas',
@@ -41,6 +44,7 @@ contains
   GD.ComponentsCommon in 'Source\GD.ComponentsCommon.pas',
   GDExportCSV in 'Source\GDExportCSV.pas',
   GDExportJSON in 'Source\GDExportJSON.pas',
-  GDEdit in 'Source\GDEdit.pas';
+  GDEdit in 'Source\GDEdit.pas',
+  GDDateFilter in 'Source\GDDateFilter.pas';
 
 end.
