@@ -1,0 +1,30 @@
+unit GD.Styles;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.DateTimeCtrls;
+
+type
+  TGDStyles = class(TForm)
+    DateEdit1: TDateEdit;
+    StyleBookGDStylesMain: TStyleBook;
+  private
+    { Private declarations }
+  public
+  { Public declarations }
+    const
+    StyleBookGDStyles: TStyleBook = StyleBookGDStylesMain;
+  end;
+
+var
+  GDStyles: TGDStyles;
+
+implementation
+
+{$R *.fmx}
+
+end.

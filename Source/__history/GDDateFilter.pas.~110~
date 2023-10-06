@@ -48,7 +48,7 @@ type
     procedure SetUseDataConnection(const Value: boolean);
     procedure ChangeBackGround;
   protected
-    procedure SetPosition(const Value: TPointF); override;
+    procedure SetPosition(const Value: TPointF);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;

@@ -38,6 +38,7 @@ type
     FStyleBook: TStyleBook;
     FUseDataConnection: boolean;
     FFilterMethod: TFilterMethod;
+    FPosition: TPointF;
     function GetVersion: string;
     procedure SetDataSource(const Value: TDataSource);
     procedure SetDataField(const Value: string);
@@ -47,8 +48,8 @@ type
     procedure SetFilterMethod(const Value: TFilterMethod);
     procedure SetUseDataConnection(const Value: boolean);
     procedure ChangeBackGround;
-  protected
-    procedure SetPosition(const Value: TPointF); override;
+    procedure SetPosition(const Value: TPointF);
+    procedure PositionChanged(Sender: TObject);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -261,6 +262,8 @@ begin
   ChangeBackGround;
   FUseDataConnection := true;
   FFilterMethod := fmFilter;
+  FPosition := TPosition.Create(TPointF.Create(0.0, 0.0));
+  FPosition.OnChange := PositionChanged;
 end;
 
 destructor TGDDateFilter.Destroy;
@@ -278,6 +281,7 @@ begin
   FLayout.Free;
   FRectangleBackground.Free;
   FStyleBook.Free;
+  FPosition.Free;
   inherited;
 end;
 

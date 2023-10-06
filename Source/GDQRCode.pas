@@ -277,6 +277,7 @@ end;
 procedure TGDQRCode.SetLink(const Value: string);
 begin
   FLink := Value;
+  Update;
 end;
 
 procedure TGDQRCode.SetQuiteZone(const Value: Integer);
@@ -291,6 +292,7 @@ end;
 procedure TGDQRCode.SetText(const Value: string);
 begin
   FLink := Value;
+  Update;
 end;
 
 procedure TGDQRCode.Update;

@@ -4,12 +4,17 @@ interface
 
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
-  FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors;
+  FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors,
+  GD.Styles;
 
 const
   COMPONENT_VERSION = '1.7.2';
+  // Função Utilizada para pegar a versão atual da Biblioteca
 function GetComponentVersion: String;
+// Função utilizada para passar para o próximo TabOrder
 procedure NextControl(Sender: TObject);
+// Função para pegar Styles prontos da GD.Styles
+procedure ReturnStyles(AStyleBook: TStyleBook);
 
 type
   TNotifyChange = procedure(Sender: TObject) of object;
@@ -80,15 +85,25 @@ type
 implementation
 
 { Get Version }
+
 function GetComponentVersion: String;
 begin
   Result := COMPONENT_VERSION;
 end;
 
+{ Return Styles }
+procedure ReturnStyles(AStyleBook: TStyleBook);
+begin
+  GDStyles := TGDStyles.Create(nil);
+  AStyleBook.Styles := GDStyles.StyleBookGDStyles.Styles;
+  GDStyles.Free;
+end;
+
+{ Next Control }
 procedure NextControl(Sender: TObject);
 var
   NextTabIndex, i: Integer;
-  NextControl, LParent,LControl: TControl;
+  NextControl, LParent, LControl: TControl;
 begin
   LParent := TControl(TControl(Sender).Parent);
   NextTabIndex := TControl(Sender).TabOrder + 1;

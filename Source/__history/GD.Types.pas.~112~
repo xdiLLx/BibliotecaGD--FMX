@@ -4,12 +4,17 @@ interface
 
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
-  FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors;
+  FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors,
+  GD.Styles;
 
 const
-  COMPONENT_VERSION = '1.7.0';
+  COMPONENT_VERSION = '1.7.2';
+  // Função Utilizada para pegar a versão atual da Biblioteca
 function GetComponentVersion: String;
-procedure NextControl(Sender:TObject);
+// Função utilizada para passar para o próximo TabOrder
+procedure NextControl(Sender: TObject);
+// Função para pegar Styles prontos da GD.Styles
+function ReturnStyles: TStyleCollection;
 
 type
   TNotifyChange = procedure(Sender: TObject) of object;
@@ -80,27 +85,42 @@ type
 implementation
 
 { Get Version }
+
 function GetComponentVersion: String;
 begin
   Result := COMPONENT_VERSION;
 end;
 
-procedure NextControl(Sender:TObject);
+{ Return Styles }
+procedure ReturnStyles(AStyleBook:TStyleBook);
+begin
+   GDStyles := TGDStyles.Create(nil);
+   Result:= GDStyles.StyleBookGDStyles.Styles;
+   GDStyles.Free;
+end;
+
+{Next Control}
+procedure NextControl(Sender: TObject);
 var
-  NextTabIndex,i: Integer;
-  NextControl,LParent: TControl;
+  NextTabIndex, i: Integer;
+  NextControl, LParent, LControl: TControl;
 begin
   LParent := TControl(TControl(Sender).Parent);
   NextTabIndex := TControl(Sender).TabOrder + 1;
-  for I := 0 to LParent.ChildrenCount-1 do
+  LControl := TControl(Sender);
+  if not LControl.TabStop then
   begin
-
+    for i := 0 to LParent.ChildrenCount - 1 do
+    begin
+      if TControl(LParent.Children[i]).TabOrder = NextTabIndex then
+      begin
+        NextControl := TControl(LParent.Children[i]);
+        if NextControl.CanFocus then
+          NextControl.SetFocus;
+        break
+      end;
+    end;
   end;
-    NextControl := TControl(LParent.Children[NextTabIndex]);
-    Inc(NextTabIndex);
-
-  if NextControl.CanFocus then
-    NextControl.SetFocus;
 end;
 
 { TColorSettings }

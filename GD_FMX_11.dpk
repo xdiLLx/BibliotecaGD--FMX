@@ -45,6 +45,7 @@ contains
   GDExportCSV in 'Source\GDExportCSV.pas',
   GDExportJSON in 'Source\GDExportJSON.pas',
   GDEdit in 'Source\GDEdit.pas',
-  GDDateFilter in 'Source\GDDateFilter.pas';
+  GDDateFilter in 'Source\GDDateFilter.pas',
+  GD.Styles in 'Source\GD.Styles.pas' {GDStyles};
 
 end.

@@ -103,6 +103,10 @@
         <DCCReference Include="Source\GDExportJSON.pas"/>
         <DCCReference Include="Source\GDEdit.pas"/>
         <DCCReference Include="Source\GDDateFilter.pas"/>
+        <DCCReference Include="Source\GD.Styles.pas">
+            <Form>GDStyles</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
