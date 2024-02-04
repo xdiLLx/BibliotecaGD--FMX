@@ -5,13 +5,14 @@ interface
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
   FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors,
-  GD.Types, FMX.Forms;
+  GD.Types, FMX.Forms, System.Types;
 
 type
   TGDCornerButton = class(TCornerButton)
   private
     FColorSettings: TColorSettings;
     FSystemClick: TSystemClick;
+    FChildColorBackup: array of TAlphaColor;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
     procedure DoOnClick(Sender: TObject);
@@ -22,6 +23,7 @@ type
     function GetVersion: string;
     function GetSystemClick: TSystemClick;
     procedure SetSystemClick(const Value: TSystemClick);
+    procedure AplicaCoresChildren;
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -114,6 +116,19 @@ begin
   end;
 end;
 
+procedure TGDCornerButton.AplicaCoresChildren;
+begin
+   SetLength(FChildColorBackup,0);
+   for var I := 0 to Self.ChildrenCount-1 do
+   begin
+     if Self.Children[i] is TLabel then
+     begin
+       SetLength(FChildColorBackup,Length(FChildColorBackup)+1);
+     end;
+   end;
+
+end;
+
 procedure TGDCornerButton.SetColorSettings(Value: TColorSettings);
 begin
 
@@ -152,6 +167,7 @@ begin
   end;
 end;
 
+
 procedure TGDCornerButton.DoMouseLeave;
 begin
   if Sender = Self then
@@ -171,6 +187,7 @@ procedure TGDCornerButton.DoOnClick(Sender: TObject);
 var
   CurrentParent: TFmxObject;
   Form: TForm;
+  Monitor: Integer;
 begin
   if Sender = Self then
   begin
@@ -190,8 +207,12 @@ begin
           end;
         Expand:
           begin
+            Monitor := GetCurrentMonitorIndex(Form);
             if Form.WindowState = TWindowState.wsNormal then
-              Form.WindowState := TWindowState.wsMaximized
+            begin
+              Form.WindowState := TWindowState.wsMaximized;
+              Form.Height := Trunc(Screen.Displays[Monitor].Bounds.Height - 40);
+            end
             else
               Form.WindowState := TWindowState.wsNormal;
 

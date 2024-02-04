@@ -12,6 +12,7 @@ type
   private
     FColorSettings: TColorSettings;
     FSystemClick: TSystemClick;
+    FChildColorBackup: array of TAlphaColor;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
     procedure DoOnClick(Sender: TObject);
@@ -22,6 +23,7 @@ type
     function GetVersion: string;
     function GetSystemClick: TSystemClick;
     procedure SetSystemClick(const Value: TSystemClick);
+    procedure AplicaCoresChildren;
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -114,6 +116,18 @@ begin
   end;
 end;
 
+procedure TGDCornerButton.AplicaCoresChildren;
+begin
+   for var I := 0 to Self.ChildrenCount-1 do
+   begin
+     if Self.Children[i] is TLabel then
+     begin
+
+     end;
+   end;
+
+end;
+
 procedure TGDCornerButton.SetColorSettings(Value: TColorSettings);
 begin
 
@@ -152,6 +166,7 @@ begin
   end;
 end;
 
+
 procedure TGDCornerButton.DoMouseLeave;
 begin
   if Sender = Self then
@@ -171,8 +186,7 @@ procedure TGDCornerButton.DoOnClick(Sender: TObject);
 var
   CurrentParent: TFmxObject;
   Form: TForm;
-  Monitor: TMonitor;
-  MonitorRect: TRect;
+  Monitor: Integer;
 begin
   if Sender = Self then
   begin
@@ -192,8 +206,12 @@ begin
           end;
         Expand:
           begin
+            Monitor := GetCurrentMonitorIndex(Form);
             if Form.WindowState = TWindowState.wsNormal then
-              Form.WindowState := TWindowState.wsMaximized
+            begin
+              Form.WindowState := TWindowState.wsMaximized;
+              Form.Height := Trunc(Screen.Displays[Monitor].Bounds.Height - 40);
+            end
             else
               Form.WindowState := TWindowState.wsNormal;
 

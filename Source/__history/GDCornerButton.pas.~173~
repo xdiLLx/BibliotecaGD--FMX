@@ -5,13 +5,14 @@ interface
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
   FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors,
-  GD.Types, FMX.Forms;
+  GD.Types, FMX.Forms, System.Types;
 
 type
   TGDCornerButton = class(TCornerButton)
   private
     FColorSettings: TColorSettings;
     FSystemClick: TSystemClick;
+    FChildColorBackup: array of TAlphaColor;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
     procedure DoOnClick(Sender: TObject);
@@ -22,6 +23,8 @@ type
     function GetVersion: string;
     function GetSystemClick: TSystemClick;
     procedure SetSystemClick(const Value: TSystemClick);
+    procedure AplicaCoresChildren;
+    procedure ReverteCoresChildren;
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -114,6 +117,37 @@ begin
   end;
 end;
 
+procedure TGDCornerButton.AplicaCoresChildren;
+begin
+   SetLength(FChildColorBackup,0);
+   for var I := 0 to Self.ChildrenCount-1 do
+   begin
+     if Self.Children[i] is TLabel then
+     begin
+       SetLength(FChildColorBackup,Length(FChildColorBackup)+1);
+       FChildColorBackup[High(FChildColorBackup)] := TLabel(Self.Children[i]).FontColor;
+       TLabel(Self.Children[i]).FontColor := ColorSettings.ActiveFontColor;
+     end;
+   end;
+
+end;
+
+procedure TGDCornerButton.ReverteCoresChildren;
+var
+y:integer;
+begin
+   y := 0;
+   for var I := 0 to Self.ChildrenCount-1 do
+   begin
+     if Self.Children[i] is TLabel then
+     begin
+       TLabel(Self.Children[i]).FontColor := FChildColorBackup[y];
+       Inc(Y);
+     end;
+   end;
+
+end;
+
 procedure TGDCornerButton.SetColorSettings(Value: TColorSettings);
 begin
 
@@ -146,11 +180,13 @@ begin
       ColorSettings.FColorFontBackup := Self.FontColor;
       Self.FontColor := ColorSettings.ActiveFontColor;
       ColorSettings.StrokeColor := ColorSettings.ActiveColor;
+      AplicaCoresChildren;
       if Assigned(Scene) then
         ApplyStyle;
     end;
   end;
 end;
+
 
 procedure TGDCornerButton.DoMouseLeave;
 begin
@@ -169,14 +205,15 @@ end;
 
 procedure TGDCornerButton.DoOnClick(Sender: TObject);
 var
-  CurrentParent: TFMXObject;
+  CurrentParent: TFmxObject;
   Form: TForm;
+  Monitor: Integer;
 begin
   if Sender = Self then
   begin
     // Encontrar o TForm na hierarquia de componentes
     CurrentParent := Parent;
-    while (CurrentParent <> nil) and (not (CurrentParent is TForm)) do
+    while (CurrentParent <> nil) and (not(CurrentParent is TForm)) do
       CurrentParent := CurrentParent.Parent;
 
     if CurrentParent is TForm then
@@ -184,18 +221,26 @@ begin
       Form := TForm(CurrentParent);
 
       case FSystemClick of
-        Close: // Para fechar a janela
-        begin
-          Form.Close;
-        end;
-        Expand: // Para maximizar ou restaurar
-        begin
-          Form.FullScreen := not Form.FullScreen;
-        end;
-        Minimize: // Para minimizar (ou esconder)
-        begin
-          Form.Visible := False; // Não há uma maneira direta de minimizar em FMX
-        end;
+        Close:
+          begin
+            Form.Close;
+          end;
+        Expand:
+          begin
+            Monitor := GetCurrentMonitorIndex(Form);
+            if Form.WindowState = TWindowState.wsNormal then
+            begin
+              Form.WindowState := TWindowState.wsMaximized;
+              Form.Height := Trunc(Screen.Displays[Monitor].Bounds.Height - 40);
+            end
+            else
+              Form.WindowState := TWindowState.wsNormal;
+
+          end;
+        Minimize:
+          begin
+            Form.WindowState := TWindowState.wsMinimized
+          end;
       end;
     end;
   end;

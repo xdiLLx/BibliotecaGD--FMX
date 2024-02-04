@@ -12,6 +12,7 @@ type
   private
     FColorSettings: TColorSettings;
     FSystemClick: TSystemClick;
+    FChildColorBackup: array of TAlphaColor;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
     procedure DoOnClick(Sender: TObject);
@@ -22,6 +23,8 @@ type
     function GetVersion: string;
     function GetSystemClick: TSystemClick;
     procedure SetSystemClick(const Value: TSystemClick);
+    procedure AplicaCoresChildren;
+    procedure ReverteCoresChildren;
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -114,6 +117,37 @@ begin
   end;
 end;
 
+procedure TGDCornerButton.AplicaCoresChildren;
+begin
+   SetLength(FChildColorBackup,0);
+   for var I := 0 to Self.ChildrenCount-1 do
+   begin
+     if Self.Children[i] is TLabel then
+     begin
+       SetLength(FChildColorBackup,Length(FChildColorBackup)+1);
+       FChildColorBackup[High(FChildColorBackup)] := TLabel(Self.Children[i]).FontColor;
+       TLabel(Self.Children[i]).FontColor := ColorSettings.ActiveFontColor;
+     end;
+   end;
+
+end;
+
+procedure TGDCornerButton.ReverteCoresChildren;
+var
+y:integer;
+begin
+   y := 0;
+   for var I := 0 to Self.ChildrenCount-1 do
+   begin
+     if Self.Children[i] is TLabel then
+     begin
+       TLabel(Self.Children[i]).FontColor := FChildColorBackup[y];
+       Inc(Y);
+     end;
+   end;
+
+end;
+
 procedure TGDCornerButton.SetColorSettings(Value: TColorSettings);
 begin
 
@@ -146,11 +180,13 @@ begin
       ColorSettings.FColorFontBackup := Self.FontColor;
       Self.FontColor := ColorSettings.ActiveFontColor;
       ColorSettings.StrokeColor := ColorSettings.ActiveColor;
+      AplicaCoresChildren;
       if Assigned(Scene) then
         ApplyStyle;
     end;
   end;
 end;
+
 
 procedure TGDCornerButton.DoMouseLeave;
 begin
@@ -161,6 +197,7 @@ begin
       ColorSettings.StrokeColor := ColorSettings.FStrokeColorBackup;
       ColorSettings.Color := ColorSettings.FColorBackup;
       Self.FontColor := ColorSettings.FColorFontBackup;
+      ReverteCoresChildren;
       if Assigned(Scene) then
         ApplyStyle;
     end;

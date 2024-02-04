@@ -22,6 +22,7 @@ type
     function GetVersion: string;
     function GetSystemClick: TSystemClick;
     procedure SetSystemClick(const Value: TSystemClick);
+    procedure AplicaCoresChildren;
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -114,6 +115,15 @@ begin
   end;
 end;
 
+procedure TGDCornerButton.AplicaCoresChildren;
+begin
+   for var I := 0 to Self.ChildrenCount-1 do
+   begin
+
+   end;
+
+end;
+
 procedure TGDCornerButton.SetColorSettings(Value: TColorSettings);
 begin
 
@@ -152,6 +162,7 @@ begin
   end;
 end;
 
+
 procedure TGDCornerButton.DoMouseLeave;
 begin
   if Sender = Self then
@@ -171,8 +182,7 @@ procedure TGDCornerButton.DoOnClick(Sender: TObject);
 var
   CurrentParent: TFmxObject;
   Form: TForm;
-  ScreenSvc: IFMXScreenService; // Serviço de tela
-  WorkAreaRect: TRect; // Área de trabalho do monitor
+  Monitor: Integer;
 begin
   if Sender = Self then
   begin
@@ -192,8 +202,12 @@ begin
           end;
         Expand:
           begin
+            Monitor := GetCurrentMonitorIndex(Form);
             if Form.WindowState = TWindowState.wsNormal then
-              Form.WindowState := TWindowState.wsMaximized
+            begin
+              Form.WindowState := TWindowState.wsMaximized;
+              Form.Height := Trunc(Screen.Displays[Monitor].Bounds.Height - 40);
+            end
             else
               Form.WindowState := TWindowState.wsNormal;
 
