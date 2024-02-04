@@ -38,16 +38,44 @@
     <Transaction>2023/10/04 02:10:57.000.678,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\CustomComponent.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/04 02:13:23.000.765,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\CustomComponent.pas=</Transaction>
     <Transaction>2023/10/04 02:14:44.000.565,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/10/04 02:15:17.000.503,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FrameTeste.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/04 02:15:17.000.503,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FrameTeste.fmx=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.fmx</Transaction>
+    <Transaction>2023/10/04 02:15:17.000.503,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FrameTeste.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/04 02:34:52.000.276,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FrameTeste.pas=</Transaction>
     <Transaction>2023/10/04 21:36:50.000.886,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/04 21:44:02.000.569,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDDateFilter.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/10/04 22:30:54.000.184,=bindengine.dcp</Transaction>
     <Transaction>2023/10/04 22:30:54.000.190,=bindcomp.dcp</Transaction>
+    <Transaction>2023/10/04 22:30:54.000.184,=bindengine.dcp</Transaction>
     <Transaction>2023/10/04 22:30:54.000.197,=bindcompfmx.dcp</Transaction>
     <Transaction>2023/10/05 23:26:33.000.560,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/05 23:27:55.000.799,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.Styles.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/05 23:27:55.000.799,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.Styles.fmx=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.fmx</Transaction>
+    <Transaction>2023/10/22 22:44:08.000.729,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
+    <Transaction>2023/10/22 22:44:34.000.258,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDTabs.pas</Transaction>
+    <Transaction>2023/10/22 22:46:15.000.800,=vcl.dcp</Transaction>
+    <Transaction>2023/10/22 22:46:15.000.834,=ChromeTabs_R.dcp</Transaction>
   </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Source"/>
+    <File Path="Source\GD.ComponentsCommon.pas"/>
+    <File Path="Source\GD.DelphiZXIngQRCode.pas"/>
+    <File Path="Source\GD.Styles.pas"/>
+    <File Path="Source\GD.Styles.fmx"/>
+    <File Path="Source\GD.Types.pas"/>
+    <File Path="Source\GDCornerButton.pas"/>
+    <File Path="Source\GDDateFilter.pas"/>
+    <File Path="Source\GDEdit.pas"/>
+    <File Path="Source\GDExportCSV.pas"/>
+    <File Path="Source\GDExportJSON.pas"/>
+    <File Path="Source\GDImage.pas"/>
+    <File Path="Source\GDQRCode.pas"/>
+    <File Path="Source\GDTabs.pas"/>
+    <File Path="bindcomp.dcp"/>
+    <File Path="bindcompfmx.dcp"/>
+    <File Path="bindengine.dcp"/>
+    <File Path="ChromeTabs_R.dcp"/>
+    <File Path="dbrtl.dcp"/>
+    <File Path="fmx.dcp"/>
+    <File Path="rtl.dcp"/>
+    <File Path="vcl.dcp"/>
+  </ProjectSortOrder>
 </BorlandProject>

@@ -14,7 +14,7 @@ function GetComponentVersion: String;
 // Função utilizada para passar para o próximo TabOrder
 procedure NextControl(Sender: TObject);
 // Função para pegar Styles prontos da GD.Styles
-function ReturnStyles: TStyleBook;
+procedure ReturnStyles(AStyleBook: TStyleBook);
 
 type
   TNotifyChange = procedure(Sender: TObject) of object;
@@ -54,6 +54,7 @@ type
     FStrokeThickness: Single;
     FActiveColor: TAlphaColor;
     FUseActiveColor: Boolean;
+    FActiveFontColor : TAlphaColor;
     FOnChange: TNotifyChange;
     procedure SetColor(const Value: TAlphaColor);
     procedure SetFillKind(const Value: TBrushKind);
@@ -61,6 +62,7 @@ type
     procedure SetStrokeThickness(const Value: Single);
     procedure SetActiveColor(const Value: TAlphaColor);
     procedure SetUseActiveColor(const Value: Boolean);
+    procedure SetActiveFontColor(const Value: TAlphaColor);
   protected
     procedure DoChange; virtual;
   public
@@ -80,6 +82,7 @@ type
       write SetUseActiveColor default False;
 {$ENDREGION}
     property OnChange: TNotifyChange read FOnChange write FOnChange;
+    property ActiveFontColor: TAlphaColor read FActiveFontColor write SetActiveFontColor;
   end;
 
 implementation
@@ -92,15 +95,14 @@ begin
 end;
 
 { Return Styles }
-function ReturnStyles: TStyleBook;
+procedure ReturnStyles(AStyleBook: TStyleBook);
 begin
-   GDStyles := TGDStyles.Create(nil);
-   Result:= GDStyles.StyleBookGDStyles;
-   Result.Parent:=false;
-   GDStyles.Free;
+  GDStyles := TGDStyles.Create(nil);
+  AStyleBook.Styles := GDStyles.StyleBookGDStyles.Styles;
+  GDStyles.Free;
 end;
 
-{Next Control}
+{ Next Control }
 procedure NextControl(Sender: TObject);
 var
   NextTabIndex, i: Integer;
@@ -144,6 +146,15 @@ begin
   if FActiveColor <> Value then
   begin
     FActiveColor := Value;
+    DoChange;
+  end;
+end;
+
+procedure TColorSettings.SetActiveFontColor(const Value: TAlphaColor);
+begin
+  if FActiveFontColor <> Value then
+  begin
+    FActiveFontColor := Value;
     DoChange;
   end;
 end;

@@ -33,7 +33,9 @@ requires
   dbrtl,
   bindengine,
   bindcomp,
-  bindcompfmx;
+  bindcompfmx,
+  vcl,
+  ChromeTabs_R;
 
 contains
   GDCornerButton in 'Source\GDCornerButton.pas',
@@ -46,6 +48,7 @@ contains
   GDExportJSON in 'Source\GDExportJSON.pas',
   GDEdit in 'Source\GDEdit.pas',
   GDDateFilter in 'Source\GDDateFilter.pas',
-  GD.Styles in 'Source\GD.Styles.pas' {GDStyles};
+  GD.Styles in 'Source\GD.Styles.pas' {GDStyles},
+  GDTabs in 'Source\GDTabs.pas';
 
 end.

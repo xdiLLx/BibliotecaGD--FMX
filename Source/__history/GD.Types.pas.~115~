@@ -14,7 +14,7 @@ function GetComponentVersion: String;
 // Função utilizada para passar para o próximo TabOrder
 procedure NextControl(Sender: TObject);
 // Função para pegar Styles prontos da GD.Styles
-function ReturnStyles: TStyleCollection;
+procedure ReturnStyles(AStyleBook: TStyleBook);
 
 type
   TNotifyChange = procedure(Sender: TObject) of object;
@@ -54,6 +54,7 @@ type
     FStrokeThickness: Single;
     FActiveColor: TAlphaColor;
     FUseActiveColor: Boolean;
+    FActiveFontColor : TAlphaColor;
     FOnChange: TNotifyChange;
     procedure SetColor(const Value: TAlphaColor);
     procedure SetFillKind(const Value: TBrushKind);
@@ -92,14 +93,14 @@ begin
 end;
 
 { Return Styles }
-procedure ReturnStyles(AStyleBook:TStyleBook);
+procedure ReturnStyles(AStyleBook: TStyleBook);
 begin
-   GDStyles := TGDStyles.Create(nil);
-   Result:= GDStyles.StyleBookGDStyles.Styles;
-   GDStyles.Free;
+  GDStyles := TGDStyles.Create(nil);
+  AStyleBook.Styles := GDStyles.StyleBookGDStyles.Styles;
+  GDStyles.Free;
 end;
 
-{Next Control}
+{ Next Control }
 procedure NextControl(Sender: TObject);
 var
   NextTabIndex, i: Integer;

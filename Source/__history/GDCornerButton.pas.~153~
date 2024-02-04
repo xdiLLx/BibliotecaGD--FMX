@@ -5,21 +5,23 @@ interface
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
   FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors,
-  GD.Types;
+  GD.Types, FMX.Forms;
 
 type
   TGDCornerButton = class(TCornerButton)
   private
     FColorSettings: TColorSettings;
-
-    function GetComponentVersion: String;
+    FSystemClick: TSystemClick;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
+    procedure DoOnClick(Sender: TObject);
     procedure SetColorSettings(Value: TColorSettings);
     procedure ColorSettingsChanged(Sender: TObject);
     procedure ChildOnMouseEnter(Sender: TObject);
     procedure ChildOnMouseLeave(Sender: TObject);
-
+    function GetVersion: string;
+    function GetSystemClick: TSystemClick;
+    procedure SetSystemClick(const Value: TSystemClick);
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -32,9 +34,10 @@ type
     destructor Destroy; override;
 
   published
-    property About: String read GetComponentVersion;
+    property About: String read GetVersion;
     property ColorSettings: TColorSettings read FColorSettings
       write SetColorSettings;
+    property SystemClick: TSystemClick read GetSystemClick write SetSystemClick;
   end;
 
 procedure Register;
@@ -72,11 +75,7 @@ begin
   FColorSettings.OnChange := ColorSettingsChanged;
   OnMouseEnter := DoMouseEnter;
   OnMouseLeave := DoMouseLeave;
-end;
-
-function TGDCornerButton.GetComponentVersion: String;
-begin
-  Result := COMPONENT_VERSION;
+  OnClick := DoOnClick;
 end;
 
 procedure TGDCornerButton.Loaded;
@@ -120,6 +119,15 @@ begin
 
 end;
 
+procedure TGDCornerButton.SetSystemClick(const Value: TSystemClick);
+begin
+  if Value <> FSystemClick then
+  begin
+    FSystemClick := Value;
+  end;
+
+end;
+
 destructor TGDCornerButton.Destroy;
 begin
   FColorSettings.Free;
@@ -135,6 +143,8 @@ begin
       ColorSettings.FColorBackup := ColorSettings.Color;
       ColorSettings.FStrokeColorBackup := ColorSettings.StrokeColor;
       ColorSettings.Color := ColorSettings.ActiveColor;
+      ColorSettings.FColorFontBackup := Self.FontColor;
+      Self.FontColor := ColorSettings.ActiveFontColor;
       ColorSettings.StrokeColor := ColorSettings.ActiveColor;
       if Assigned(Scene) then
         ApplyStyle;
@@ -150,10 +160,49 @@ begin
     begin
       ColorSettings.StrokeColor := ColorSettings.FStrokeColorBackup;
       ColorSettings.Color := ColorSettings.FColorBackup;
+      Self.FontColor := ColorSettings.FColorFontBackup;
       if Assigned(Scene) then
         ApplyStyle;
     end;
   end;
+end;
+
+procedure TGDCornerButton.DoOnClick(Sender: TObject);
+begin
+  if Sender = Self then
+  begin
+    case FSystemClick of
+      Close:
+        begin
+          if Parent is TForm then
+            TForm(Parent).Close
+          else if (Parent <> nil) and (Parent.Parent is TForm) then
+            TForm(Parent.Parent).Close;
+        end;
+      Expand:
+        begin
+          if TForm(Parent).WindowState = TWindowState.wsNormal then
+            TForm(Parent).WindowState := TWindowState.wsMaximized
+          else
+            TForm(Parent).WindowState := TWindowState.wsNormal;
+
+        end;
+      Minimize:
+        begin
+           TForm(Parent).WindowState := TWindowState.wsMinimized;
+        end;
+    end;
+  end;
+end;
+
+function TGDCornerButton.GetSystemClick: TSystemClick;
+begin
+  Result := FSystemClick;
+end;
+
+function TGDCornerButton.GetVersion: string;
+begin
+  Result := GetComponentVersion;
 end;
 
 procedure TGDCornerButton.MouseDown(Button: TMouseButton; Shift: TShiftState;

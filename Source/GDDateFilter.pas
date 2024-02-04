@@ -47,8 +47,6 @@ type
     procedure SetFilterMethod(const Value: TFilterMethod);
     procedure SetUseDataConnection(const Value: boolean);
     procedure ChangeBackGround;
-  protected
-    procedure SetPosition(const Value: TPointF); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -72,7 +70,6 @@ type
       write SetUseDataConnection;
     property FilterMethod: TFilterMethod read FFilterMethod
       write SetFilterMethod;
-    property Position: TPointF read FPosition write SetPosition;
   end;
 
 procedure Register;
@@ -286,11 +283,6 @@ begin
   Result := GetComponentVersion;
 end;
 
-procedure TGDDateFilter.PositionChanged(Sender: TObject);
-begin
-  Left := Round(FPosition.X);
-  top := Round(FPosition.Y);
-end;
 
 procedure TGDDateFilter.SetDataSource(const Value: TDataSource);
 begin
@@ -326,16 +318,6 @@ begin
   begin
     FInicialDate := Value;
     FInicialDateEdit.Date := Value;
-  end;
-end;
-
-procedure TGDDateFilter.SetPosition(const Value: TPointF);
-begin
-  if (Value.X <> FPosition.X) or (Value.Y <> FPosition.Y) then
-  begin
-    FPosition := Value;
-    Left := Round(FPosition.X);
-    top := Round(FPosition.Y);
   end;
 end;
 

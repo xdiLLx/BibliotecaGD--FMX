@@ -7,7 +7,7 @@ uses
   GD.Types,
   Data.DB, FMX.Bind.DBEngExt, FMX.Layouts, FMX.Graphics, System.UITypes,
   FMX.StdCtrls, FMX.DateTimeCtrls, FMX.Ani, FMX.Styles.Objects, FMX.Dialogs,
-  GD.Styles;
+  GD.Styles, System.Types;
 
 Const
   DefaultSecondaryColor: TAlphaColor = $FFDAD8D8;
@@ -38,7 +38,6 @@ type
     FStyleBook: TStyleBook;
     FUseDataConnection: boolean;
     FFilterMethod: TFilterMethod;
-    FPosition: TPosition;
     function GetVersion: string;
     procedure SetDataSource(const Value: TDataSource);
     procedure SetDataField(const Value: string);
@@ -48,7 +47,8 @@ type
     procedure SetFilterMethod(const Value: TFilterMethod);
     procedure SetUseDataConnection(const Value: boolean);
     procedure ChangeBackGround;
-    procedure PositionChanged(Sender: TObject);
+  protected
+    procedure SetPosition(const Value: TPointF); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -72,7 +72,7 @@ type
       write SetUseDataConnection;
     property FilterMethod: TFilterMethod read FFilterMethod
       write SetFilterMethod;
-    property Position: TPosition read FPosition write FPosition;
+    property Position: TPointF read FPosition write SetPosition;
   end;
 
 procedure Register;
@@ -326,6 +326,16 @@ begin
   begin
     FInicialDate := Value;
     FInicialDateEdit.Date := Value;
+  end;
+end;
+
+procedure TGDDateFilter.SetPosition(const Value: TPointF);
+begin
+  if (Value.X <> FPosition.X) or (Value.Y <> FPosition.Y) then
+  begin
+    FPosition := Value;
+    Left := Round(FPosition.X);
+    top := Round(FPosition.Y);
   end;
 end;
 

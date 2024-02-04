@@ -14,7 +14,7 @@ function GetComponentVersion: String;
 // Função utilizada para passar para o próximo TabOrder
 procedure NextControl(Sender: TObject);
 // Função para pegar Styles prontos da GD.Styles
-function ReturnStyles: TStyleBook;
+procedure ReturnStyles(AStyleBook: TStyleBook);
 
 type
   TNotifyChange = procedure(Sender: TObject) of object;
@@ -92,16 +92,14 @@ begin
 end;
 
 { Return Styles }
-function ReturnStyles: TStyleBook;
+procedure ReturnStyles(AStyleBook: TStyleBook);
 begin
-   GDStyles := TGDStyles.Create(nil);
-   Result:= GDStyles.StyleBookGDStyles;
-   Result.Parent:=nil;
-   Result.Owner:= nil;
-   GDStyles.Free;
+  GDStyles := TGDStyles.Create(nil);
+  AStyleBook.Styles := GDStyles.StyleBookGDStyles.Styles;
+  GDStyles.Free;
 end;
 
-{Next Control}
+{ Next Control }
 procedure NextControl(Sender: TObject);
 var
   NextTabIndex, i: Integer;
