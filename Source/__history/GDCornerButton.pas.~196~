@@ -5,13 +5,14 @@ interface
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
   FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors,
-  GD.Types, FMX.Forms, System.Types;
+  GD.Types, FMX.Forms, System.Types, WinApi.ShellApi, WinApi.Windows;
 
 type
   TGDCornerButton = class(TCornerButton)
   private
     FColorSettings: TColorSettings;
     FSystemClick: TSystemClick;
+    FNotifyIconData: TNotifyIconData;
     FChildColorBackup: array of TAlphaColor;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
@@ -141,8 +142,8 @@ begin
    begin
      if Self.Children[i] is TLabel then
      begin
-
-       TLabel(Self.Children[i]).FontColor := FChildColorBackup[];
+       TLabel(Self.Children[i]).FontColor := FChildColorBackup[y];
+       Inc(Y);
      end;
    end;
 
@@ -180,6 +181,7 @@ begin
       ColorSettings.FColorFontBackup := Self.FontColor;
       Self.FontColor := ColorSettings.ActiveFontColor;
       ColorSettings.StrokeColor := ColorSettings.ActiveColor;
+      AplicaCoresChildren;
       if Assigned(Scene) then
         ApplyStyle;
     end;
@@ -196,6 +198,7 @@ begin
       ColorSettings.StrokeColor := ColorSettings.FStrokeColorBackup;
       ColorSettings.Color := ColorSettings.FColorBackup;
       Self.FontColor := ColorSettings.FColorFontBackup;
+      ReverteCoresChildren;
       if Assigned(Scene) then
         ApplyStyle;
     end;
@@ -207,6 +210,7 @@ var
   CurrentParent: TFmxObject;
   Form: TForm;
   Monitor: Integer;
+
 begin
   if Sender = Self then
   begin
@@ -240,6 +244,10 @@ begin
           begin
             Form.WindowState := TWindowState.wsMinimized
           end;
+        TrayIcon:
+        begin
+
+        end;
       end;
     end;
   end;

@@ -19,7 +19,7 @@ function GetCurrentMonitorIndex(Form: TForm): Integer;
 
 
 type
-  TSystemClick = (None,Close,Expand,Minimize) ;
+  TSystemClick = (None,Close,Expand,Minimize,TrayIcon) ;
 
 type
   TNotifyChange = procedure(Sender: TObject) of object;

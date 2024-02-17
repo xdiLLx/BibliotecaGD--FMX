@@ -5,13 +5,17 @@ interface
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.StdCtrls,
   FMX.Graphics, System.UITypes, FMX.Objects, System.Math, System.Math.Vectors,
-  GD.Types, FMX.Forms, System.Types;
+  GD.Types, FMX.Forms, System.Types, WinApi.ShellApi, WinApi.Windows,
+  Winapi.Messages;
 
 type
   TGDCornerButton = class(TCornerButton)
   private
     FColorSettings: TColorSettings;
     FSystemClick: TSystemClick;
+    TrayWnd: HWND;
+    TrayIconData: TNotifyIconData;
+    TrayIconAdded: Boolean;
     FChildColorBackup: array of TAlphaColor;
     procedure DoMouseEnter(Sender: TObject);
     procedure DoMouseLeave(Sender: TObject);
@@ -25,6 +29,7 @@ type
     procedure SetSystemClick(const Value: TSystemClick);
     procedure AplicaCoresChildren;
     procedure ReverteCoresChildren;
+    procedure TrayWndProc(var Message: TMessage);
   protected
     procedure ApplyStyle; override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
@@ -119,32 +124,33 @@ end;
 
 procedure TGDCornerButton.AplicaCoresChildren;
 begin
-   SetLength(FChildColorBackup,0);
-   for var I := 0 to Self.ChildrenCount-1 do
-   begin
-     if Self.Children[i] is TLabel then
-     begin
-       SetLength(FChildColorBackup,Length(FChildColorBackup)+1);
-       FChildColorBackup[High(FChildColorBackup)] := TLabel(Self.Children[i]).FontColor;
-       TLabel(Self.Children[i]).FontColor := ColorSettings.ActiveFontColor;
-     end;
-   end;
+  SetLength(FChildColorBackup, 0);
+  for var i := 0 to Self.ChildrenCount - 1 do
+  begin
+    if Self.Children[i] is TLabel then
+    begin
+      SetLength(FChildColorBackup, Length(FChildColorBackup) + 1);
+      FChildColorBackup[High(FChildColorBackup)] := TLabel(Self.Children[i])
+        .FontColor;
+      TLabel(Self.Children[i]).FontColor := ColorSettings.ActiveFontColor;
+    end;
+  end;
 
 end;
 
 procedure TGDCornerButton.ReverteCoresChildren;
 var
-y:integer;
+  Y: Integer;
 begin
-   y := 0;
-   for var I := 0 to Self.ChildrenCount-1 do
-   begin
-     if Self.Children[i] is TLabel then
-     begin
-       TLabel(Self.Children[i]).FontColor := FChildColorBackup[y];
-       Inc(Y);
-     end;
-   end;
+  Y := 0;
+  for var i := 0 to Self.ChildrenCount - 1 do
+  begin
+    if Self.Children[i] is TLabel then
+    begin
+      TLabel(Self.Children[i]).FontColor := FChildColorBackup[Y];
+      Inc(Y);
+    end;
+  end;
 
 end;
 
@@ -159,6 +165,11 @@ begin
   begin
     FSystemClick := Value;
   end;
+
+end;
+
+procedure TGDCornerButton.TrayWndProc(var Message: TMessage);
+begin
 
 end;
 
@@ -187,7 +198,6 @@ begin
   end;
 end;
 
-
 procedure TGDCornerButton.DoMouseLeave;
 begin
   if Sender = Self then
@@ -197,6 +207,7 @@ begin
       ColorSettings.StrokeColor := ColorSettings.FStrokeColorBackup;
       ColorSettings.Color := ColorSettings.FColorBackup;
       Self.FontColor := ColorSettings.FColorFontBackup;
+      ReverteCoresChildren;
       if Assigned(Scene) then
         ApplyStyle;
     end;
@@ -208,6 +219,7 @@ var
   CurrentParent: TFmxObject;
   Form: TForm;
   Monitor: Integer;
+
 begin
   if Sender = Self then
   begin
@@ -240,6 +252,10 @@ begin
         Minimize:
           begin
             Form.WindowState := TWindowState.wsMinimized
+          end;
+        TrayIcon:
+          begin
+
           end;
       end;
     end;
