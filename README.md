@@ -1,38 +1,37 @@
-# Biblioteca DelphiGD FMX
+# DelphiGD FMX Library
 
-A Biblioteca DelphiGD FMX é uma coleção de componentes personalizados para Delphi que oferecem funcionalidades adicionais e estilização avançada para a interface do usuário, além de fornecer facilidades para desenvolvedores VCL que desejam migrar para FMX.
+The DelphiGD FMX Library is a collection of custom components for Delphi that provide additional functionalities and advanced styling for the user interface, as well as offering facilities for VCL developers wishing to migrate to FMX.
 
-## Sobre a Biblioteca
+## About the Library
 
-A Biblioteca DelphiGD FMX tem como objetivo aprimorar a experiência de desenvolvimento no Delphi, oferecendo um conjunto de componentes poderosos com recursos estendidos. Esses componentes foram projetados para agilizar a criação de aplicativos visualmente atraentes,interativos e disponibilizar conexão com banco de Dados. Com o DelphiGD FMX, você pode incorporar facilmente elementos avançados de interface do usuário em seus projetos e personalizá-los de acordo com suas necessidades específicas.
+The aim of the DelphiGD FMX Library is to enhance the Delphi development experience by offering a set of powerful components with extended features. These components are designed to facilitate the creation of visually appealing, interactive applications and provide easy database connectivity. With DelphiGD FMX, you can easily incorporate advanced user interface elements into your projects and customize them according to your specific needs.
 
+## Components
 
-## Componentes
+- **TGDCornerButton** - [FUNCTIONAL]: A button with new styling options for the standard TCornerButton, offering new functionalities like ActiveColor (Hover Effect).
+- **TGDEdit** - [FUNCTIONAL]: An FMX version of the classic VCL DBEdit, enabling easy connection to a data source and specific component.
+- **TGDImage** - [FUNCTIONAL]: An image component capable of connecting to an ImageList and fetching an image by name through the ImageName property.
+- **TGDExportCSV** - [FUNCTIONAL]: A component that easily connects to a data source, allowing for exporting in CSV format with just one line.
+- **TGDExportJSON** - [FUNCTIONAL]: A component that easily connects to a data source, allowing for exporting in JSON format with just one line.
+- **TGDQRCode** - [FUNCTIONAL]: A pre-made QRCode component, offering simple and functional customization with just one line of code.
 
-- [TGDCornerButton]() - [FUNCIONAL]: Um botão com novas opções de estilização para o TCornerButton padrão, além de oferecer novas funcionalidades como ActiveColor( Hover Effect ).
-- [TGDEdit]() - [FUNCIONAL]: Uma versão do clássico DBEdit do VCL para FMX, que possibilita conectar facilmente o componente a uma fonte de dados e componente especifico.
-- [TGDImage]() - [FUNCIONAL]: Um componente de imagem capaz de se conectar a um ImageList e receber uma imagem buscada pelo nome na propriedade ImageName.
-- [TGDExportCSV]() - [FUNCIONAL]: Um componente que possibilita conectar facilmente a uma fonte de dados possibilitando exporta-la no formato CSV com apenas uma linha.
-- [TGDExportJSON]() - [FUNCIONAL]: Um componente que possibilita conectar facilmente a uma fonte de dados possibilitando exporta-la no formato JSON com apenas uma linha.
-- [TGDQRCode]() - [FUNCIONAL]: Um componente QRCode ja criado, que da a possibilidade de personaliza-lo de maneira simples e funcional com apenas uma linha de código.
+## Usage
 
-## Uso
+To use the DelphiGD FMX Library in your Delphi projects, follow these steps:
 
-Para utilizar a Biblioteca DelphiGD FMX em seus projetos Delphi, siga estas etapas:
+1. Download the DelphiGD FMX Library.
+2. Add the relevant library units to your Delphi project.
+3. Include the library's source code folder in the Delphi IDE's library paths.
+4. Refer to the documentation and provided examples for each component to learn how to incorporate them into your application.
 
-1. Faça o download da Biblioteca DelphiGD FMX.
-2. Adicione as unidades relevantes da biblioteca ao seu projeto Delphi.
-3. Inclua a pasta de código-fonte da biblioteca nos caminhos de biblioteca do IDE do Delphi.
-4. Consulte a documentação e os exemplos fornecidos para cada componente para aprender como incorporá-los ao seu aplicativo.
+## Support the Project
 
-## Apoie o Projeto
+The DelphiGD FMX Library is an open-source project maintained by dedicated volunteers. If you would like to support the project and contribute to its ongoing development, you can make a donation via Pix to the following email: [gabrieldill05@gmail.com](mailto:gabrieldill05@gmail.com)
 
-A Biblioteca DelphiGD FMX é um projeto de código aberto mantido por voluntários dedicados. Se você gostaria de apoiar o projeto e contribuir para seu desenvolvimento contínuo, você pode fazer uma doação por meio do Pix no seguinte e-mail : [gabrieldill05@gmail.com](mailto:gabrieldill05@gmail.com)
+## License
 
-## Licença
+The DelphiGD Library is entirely free for both educational and commercial purposes, but consider making a donation to support the project.
 
-A Biblioteca DelphiGD é totalmente gratuita tanto para fins educativos quanto comerciais, porém considere fazer uma doação para auxiliar o projeto.
+## Contact
 
-## Contato
-
-Se você tiver alguma dúvida ou sugestão sobre a Biblioteca DelphiGD FMX, entre em contato conosco em [gabrieldill05@gmail.com](mailto:gabrieldill05@gmail.com).
+If you have any questions or suggestions about the DelphiGD FMX Library, please contact us at [gabrieldill05@gmail.com](mailto:gabrieldill05@gmail.com).
