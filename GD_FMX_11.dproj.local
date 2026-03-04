@@ -20,8 +20,8 @@
     <Transaction>2023/09/30 14:53:35.000.556,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/09/30 14:54:05.000.678,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDQRCode.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/09/30 14:54:40.000.465,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas</Transaction>
-    <Transaction>2023/09/30 15:05:23.000.860,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas=</Transaction>
     <Transaction>2023/09/30 15:05:23.000.905,=FMXComponents.dcp</Transaction>
+    <Transaction>2023/09/30 15:05:23.000.860,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas=</Transaction>
     <Transaction>2023/09/30 15:07:55.000.646,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\DelphiZXIngQRCode.pas</Transaction>
     <Transaction>2023/09/30 15:12:41.000.635,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FMX.ComponentsCommon.pas</Transaction>
     <Transaction>2023/09/30 15:14:21.000.526,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.ComponentsCommon.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FMX.ComponentsCommon.pas</Transaction>
@@ -43,16 +43,18 @@
     <Transaction>2023/10/04 02:34:52.000.276,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\FrameTeste.pas=</Transaction>
     <Transaction>2023/10/04 21:36:50.000.886,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/04 21:44:02.000.569,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDDateFilter.pas</Transaction>
-    <Transaction>2023/10/04 22:30:54.000.197,=bindcompfmx.dcp</Transaction>
-    <Transaction>2023/10/04 22:30:54.000.184,=bindengine.dcp</Transaction>
     <Transaction>2023/10/04 22:30:54.000.190,=bindcomp.dcp</Transaction>
+    <Transaction>2023/10/04 22:30:54.000.184,=bindengine.dcp</Transaction>
+    <Transaction>2023/10/04 22:30:54.000.197,=bindcompfmx.dcp</Transaction>
     <Transaction>2023/10/05 23:26:33.000.560,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
-    <Transaction>2023/10/05 23:27:55.000.799,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.fmx=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.Styles.fmx</Transaction>
     <Transaction>2023/10/05 23:27:55.000.799,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.Styles.pas</Transaction>
+    <Transaction>2023/10/05 23:27:55.000.799,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.fmx=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GD.Styles.fmx</Transaction>
     <Transaction>2023/10/22 22:44:08.000.729,=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/22 22:44:34.000.258,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDTabs.pas=E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Unit1.pas</Transaction>
     <Transaction>2023/10/22 22:46:15.000.800,=vcl.dcp</Transaction>
     <Transaction>2023/10/22 22:46:15.000.834,=ChromeTabs_R.dcp</Transaction>
+    <Transaction>2024/10/22 22:48:54.000.473,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDTabs.pas=</Transaction>
+    <Transaction>2024/10/22 22:49:32.000.494,E:\Meus Projetos\BibliotecaGD--FMX\BibliotecaGD--FMX\Source\GDQRCode.pas=</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="Source"/>
@@ -67,12 +69,9 @@
     <File Path="Source\GDExportCSV.pas"/>
     <File Path="Source\GDExportJSON.pas"/>
     <File Path="Source\GDImage.pas"/>
-    <File Path="Source\GDQRCode.pas"/>
-    <File Path="Source\GDTabs.pas"/>
     <File Path="bindcomp.dcp"/>
     <File Path="bindcompfmx.dcp"/>
     <File Path="bindengine.dcp"/>
-    <File Path="ChromeTabs_R.dcp"/>
     <File Path="dbrtl.dcp"/>
     <File Path="fmx.dcp"/>
     <File Path="rtl.dcp"/>

@@ -1,6 +1,7 @@
 unit GDQRCode;
 
 interface
+
 uses
   System.Classes,
   System.SysUtils,
@@ -11,10 +12,10 @@ uses
   FMX.Graphics,
   FMX.Objects,
   FMX.MultiResBitmap,
-  FMX.Platform,
-  FMX.ComponentsCommon,
-  DelphiZXingQRCode;
+  FMX.Platform, GD.ComponentsCommon, GD.DelphiZXIngQRCode, GD.Types;
+
 type
+
   [ComponentPlatformsAttribute(TFMXPlatforms)]
   TGDQRCode = class(TControl)
   private
@@ -25,6 +26,7 @@ type
     FQRImage: TBitmap;
     FQuietZone: Integer;
     FIcon: TImage;
+    function GetVersion: string;
     procedure SetLink(const Value: String);
     function GetText: string;
     procedure SetText(const Value: string);
@@ -41,13 +43,14 @@ type
     function GetIconBitmap: TFixedMultiResBitmap;
     procedure SetIconBitmap(const Value: TFixedMultiResBitmap);
   protected
-    procedure Paint;override;
+    procedure Paint; override;
     procedure Resize; override;
   public
     constructor Create(AOwner: TComponent); override;
-    destructor Destroy;override;
+    destructor Destroy; override;
     property Text: string read GetText write SetText;
   published
+    property About: String read GetVersion;
     property Align;
     property Anchors;
     property ClipChildren default False;
@@ -70,11 +73,15 @@ type
     property Size;
     property Visible default True;
     property Width;
-    property BackGround: TAlphaColor  read FBackGround write SetBackGround default TAlphaColors.White;
-    property ForeGround: TAlphaColor read FForeGround write SetForeGround default TAlphaColors.Black;
-    property IconBitmap: TFixedMultiResBitmap read GetIconBitmap write SetIconBitmap;
+    property BackGround: TAlphaColor read FBackGround write SetBackGround
+      default TAlphaColors.White;
+    property ForeGround: TAlphaColor read FForeGround write SetForeGround
+      default TAlphaColors.Black;
+    property IconBitmap: TFixedMultiResBitmap read GetIconBitmap
+      write SetIconBitmap;
     property IconSize: TControlSize read GetIconSize write SetIconSize;
-    property IconVisible: Boolean read GetIconVisible write SetIconVisible default False;
+    property IconVisible: Boolean read GetIconVisible write SetIconVisible
+      default False;
     property Link: String read FLink write SetLink;
     property QuiteZone: Integer read FQuietZone write SetQuiteZone default 2;
     { Drag and Drop events }
@@ -99,12 +106,22 @@ type
     property OnResized;
 {$ENDIF}
   end;
+
+const
+  TFMXPlatforms = pidWin32 or pidWin64 or pidOSX32 or pidiOSSimulator or
+    pidiOSDevice32 or pidiOSDevice64 or pidAndroid;
+
+procedure Register;
+
 implementation
+
 { TGDQRCode }
+
 procedure Register;
 begin
   RegisterComponents('Delphi | Biblioteca GD', [TGDQRCode]);
 end;
+
 constructor TGDQRCode.Create(AOwner: TComponent);
 begin
   inherited;
@@ -123,6 +140,7 @@ begin
   FNeedUpdate := True;
   SetSize(148, 148);
 end;
+
 procedure TGDQRCode.CreateQRImage;
 var
   QRCode: TDelphiZXingQRCode;
@@ -131,15 +149,16 @@ var
   ScreenService: IFMXScreenService;
   Scale1: Single;
 begin
-  if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, ScreenService) then
+  if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService,
+    ScreenService) then
     Scale1 := ScreenService.GetScreenScale
   else
     Scale1 := 1;
   if FNeedUpdate then
   begin
     if not Assigned(FQRImage) then
-      FQRImage := TBitmap.Create(
-        Round(Scale1 * Self.Width), Round(Scale1 * Self.Height));
+      FQRImage := TBitmap.Create(Round(Scale1 * Self.Width),
+        Round(Scale1 * Self.Height));
     QRCode := TDelphiZXingQRCode.Create;
     try
       QRCode.Data := Text;
@@ -166,56 +185,66 @@ begin
       finally
         FQRImage.Unmap(Data);
       end;
-  finally
-    QRCode.Free;
-  end;
+    finally
+      QRCode.Free;
+    end;
     FNeedUpdate := False;
   end;
 end;
+
 destructor TGDQRCode.Destroy;
 begin
   FQRImage.Free;
   inherited;
 end;
+
 function TGDQRCode.GetIconBitmap: TFixedMultiResBitmap;
 begin
   Result := FIcon.MultiResBitmap;
 end;
+
 function TGDQRCode.GetIconSize: TControlSize;
 begin
   Result := FIcon.Size;
 end;
+
 function TGDQRCode.GetIconVisible: Boolean;
 begin
   Result := FIcon.Visible;
 end;
+
 function TGDQRCode.GetText: string;
 begin
   Result := FLink;
 end;
+
+function TGDQRCode.GetVersion: string;
+begin
+  Result := GetComponentVersion;
+end;
+
 procedure TGDQRCode.OnLinesChange(Sender: TObject);
 begin
   Update;
 end;
+
 procedure TGDQRCode.Paint;
-//var
-//  Brush: TBrush;
+// var
+// Brush: TBrush;
 begin
   inherited;
   CreateQRImage;
-  Canvas.DrawBitmap(FQRImage,
-      FQRImage.Bounds,
-      RectF(0,0,Width,Height),
-      AbsoluteOpacity,
-      True
-      );
- end;
+  Canvas.DrawBitmap(FQRImage, FQRImage.Bounds, RectF(0, 0, Width, Height),
+    AbsoluteOpacity, True);
+end;
+
 procedure TGDQRCode.Resize;
 begin
   inherited;
   Update;
   Repaint;
 end;
+
 procedure TGDQRCode.SetBackGround(const Value: TAlphaColor);
 begin
   if FBackGround <> Value then
@@ -224,6 +253,7 @@ begin
     Update;
   end;
 end;
+
 procedure TGDQRCode.SetForeGround(const Value: TAlphaColor);
 begin
   if FForeGround <> Value then
@@ -232,22 +262,28 @@ begin
     Update;
   end;
 end;
+
 procedure TGDQRCode.SetIconBitmap(const Value: TFixedMultiResBitmap);
 begin
   FIcon.MultiResBitmap := Value;
 end;
+
 procedure TGDQRCode.SetIconSize(const Value: TControlSize);
 begin
   FIcon.Size := Value;
 end;
+
 procedure TGDQRCode.SetIconVisible(const Value: Boolean);
 begin
   FIcon.Visible := Value;
 end;
+
 procedure TGDQRCode.SetLink(const Value: string);
 begin
-  FLink := value;
+  FLink := Value;
+  Update;
 end;
+
 procedure TGDQRCode.SetQuiteZone(const Value: Integer);
 begin
   if FQuietZone <> Value then
@@ -256,13 +292,17 @@ begin
     Update;
   end;
 end;
+
 procedure TGDQRCode.SetText(const Value: string);
 begin
   FLink := Value;
+  Update;
 end;
+
 procedure TGDQRCode.Update;
 begin
   FNeedUpdate := True;
   Repaint;
 end;
+
 end.

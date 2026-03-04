@@ -34,21 +34,18 @@ requires
   bindengine,
   bindcomp,
   bindcompfmx,
-  vcl,
-  ChromeTabs_R;
+  vcl;
 
 contains
-  GDCornerButton in 'Source\GDCornerButton.pas',
-  GDImage in 'Source\GDImage.pas',
-  GD.Types in 'Source\GD.Types.pas',
-  GDQRCode in 'Source\GDQRCode.pas',
-  GD.DelphiZXIngQRCode in 'Source\GD.DelphiZXIngQRCode.pas',
-  GD.ComponentsCommon in 'Source\GD.ComponentsCommon.pas',
-  GDExportCSV in 'Source\GDExportCSV.pas',
-  GDExportJSON in 'Source\GDExportJSON.pas',
-  GDEdit in 'Source\GDEdit.pas',
-  GDDateFilter in 'Source\GDDateFilter.pas',
-  GD.Styles in 'Source\GD.Styles.pas' {GDStyles},
-  GDTabs in 'Source\GDTabs.pas';
+  GDCornerButton in 'Source\Components\GDCornerButton\GDCornerButton.pas',
+  GDImage in 'Source\Components\GDImage\GDImage.pas',
+  GD.Types in 'Source\Shared\GD.Types.pas',
+  GD.DelphiZXIngQRCode in 'Source\External\GD.DelphiZXIngQRCode.pas',
+  GD.ComponentsCommon in 'Source\Shared\GD.ComponentsCommon.pas',
+  GDExportCSV in 'Source\Components\GDExport\GDExportCSV.pas',
+  GDExportJSON in 'Source\Components\GDExport\GDExportJSON.pas',
+  GDEdit in 'Source\Components\GDEdit\GDEdit.pas',
+  GDDateFilter in 'Source\Components\GDDateFilter\GDDateFilter.pas',
+  GD.Styles in 'Source\Shared\GD.Styles.pas' {GDStyles};
 
 end.
